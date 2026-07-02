@@ -43,8 +43,10 @@
   .cardrow .wx{margin-left:auto;flex:0 0 auto}
   .hero-sky{flex:0 0 auto}
   .radar-card .radarwrap{overflow:hidden;border-radius:6px;aspect-ratio:6/5;
-    background:#dfe9f2;position:relative}
+    background:#dfe9f2;position:relative;border:1px solid var(--line)}
   .radar-card img{position:absolute;width:330%;height:auto;left:-129.9%;top:-205.9%}
+  .radar-card .radartint{position:absolute;inset:0;background:#dde9f3;
+    mix-blend-mode:multiply;pointer-events:none}
   .radar-card .wxchip .temp{color:var(--risk)}
   .radar-card .note a{color:var(--accent);font-weight:600;text-decoration:none}
   .mini{width:52px;height:52px;flex:0 0 auto}
@@ -146,14 +148,14 @@
     </div>
     <div class="desc">East winds 5 to 10 knots. Bay and inland waters light chop. A chance of showers and thunderstorms until early morning. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less, 2 s period. Tides: High 1:33 PM, Low 9:54 PM. Best bite 6:09 AM–8:09 AM (good).</div>
   </div>
-  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WNW 9 kt, gusting 10 &middot; Air 85&deg;F &middot; Water 90&deg;F &middot; Mostly Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 3:06 PM</span></div>
+  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind NW 12 kt, gusting 16 &middot; Air 84&deg;F &middot; Water 90&deg;F &middot; Mostly Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 3:18 PM</span></div>
 
   <div class="grid">
     <div class="card radar-card">
       <h3>Radar &middot; Charlotte Harbor<span class="wxchip"><span class="temp">LIVE</span></span></h3>
       <div class="radarwrap"><img id="radarimg" alt="NWS Tampa Bay (KTBW) radar loop, zoomed to Charlotte Harbor"
         data-src="https://radar.weather.gov/ridge/standard/KTBW_loop.gif"
-        src="https://radar.weather.gov/ridge/standard/KTBW_loop.gif"></div>
+        src="https://radar.weather.gov/ridge/standard/KTBW_loop.gif"><span class="radartint"></span></div>
       <div class="note">NWS Tampa Bay (KTBW) loop, zoomed to the harbor. Refreshes every
         5 minutes with the Right Now strip. <a href="https://radar.weather.gov/station/ktbw/standard">Full view</a>.</div>
     </div><div class="card">
