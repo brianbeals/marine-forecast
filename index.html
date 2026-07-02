@@ -125,7 +125,7 @@
     afternoon and evening showers and thunderstorms, which build daily and can spike local seas and gusts.
     Run the pass and any Gulf legs before early afternoon.
   </div>
-  <div class="trop t0">Tropics quiet &mdash; no Atlantic development expected in the next 7 days. NHC outlook, 800 AM EDT Thu Jul 2 2026.</div>
+  <div class="trop t0">Tropics quiet &mdash; no Atlantic development expected in the next 7 days. NHC outlook, 200 PM EDT Thu Jul 2 2026.</div>
 
   <div class="today">
     <h2>Today &middot; Thursday</h2>
@@ -141,7 +141,7 @@
     </div>
     <div class="desc">East winds around 5 knots, becoming south early, then becoming west late. Bay and inland waters smooth. Scattered showers and thunderstorms. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less, 2 s period. Tides: High 1:33 PM, Low 9:54 PM. Best bite 6:09 AM–8:09 AM (good).</div>
   </div>
-  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind ESE 6 kt, gusting 8 &middot; Water 88&deg;F</span><span class="now-src">Fort Myers station (nearest live obs), 10:18 AM</span></div>
+  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind ENE 6 kt, gusting 8 &middot; Water 89&deg;F</span><span class="now-src">Fort Myers station (nearest live obs), 1:30 PM</span></div>
 
   <div class="grid">
     <div class="card">
@@ -252,5 +252,39 @@
     confirm the latest official NWS forecast before leaving the dock.</p>
   </footer>
 </div>
+<script>
+(async () => {
+  const el = document.querySelector(".nowstrip");
+  if (!el) return;
+  const base = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter" +
+    "?station=8725520&date=latest&time_zone=lst_ldt&units=english&format=json&product=";
+  try {
+    const [w, t] = await Promise.all(["wind", "water_temperature"].map(
+      p => fetch(base + p).then(r => r.json()).catch(() => null)));
+    const bits = [];
+    let ts = "", station = "";
+    if (w && w.data && w.data[0] && w.data[0].s) {
+      const d = w.data[0];
+      const s = Math.round(parseFloat(d.s)), g = Math.round(parseFloat(d.g || 0));
+      bits.push("Wind " + d.dr + " " + s + " kt" + (g > s ? ", gusting " + g : ""));
+      ts = d.t; station = w.metadata && w.metadata.name || "";
+    }
+    if (t && t.data && t.data[0] && t.data[0].v) {
+      bits.push("Water " + Math.round(parseFloat(t.data[0].v)) + "\u00B0F");
+      ts = ts || t.data[0].t;
+      station = station || (t.metadata && t.metadata.name) || "";
+    }
+    if (!bits.length) return;
+    el.querySelector(".now-val").textContent = bits.join(" \u00B7 ");
+    if (ts && station) {
+      const [hh24, mm] = ts.split(" ")[1].split(":").map(Number);
+      const hh = hh24 % 12 || 12, ap = hh24 >= 12 ? "PM" : "AM";
+      el.querySelector(".now-src").textContent =
+        station + " station (nearest live obs), " + hh + ":" +
+        String(mm).padStart(2, "0") + " " + ap;
+    }
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
