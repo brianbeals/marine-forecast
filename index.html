@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E3A5F'/%3E%3Ctext x='16' y='15' text-anchor='middle' dominant-baseline='central' fill='white' font-family='system-ui' font-size='16' font-weight='800'%3EBB%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#1E3A5F">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#1E3A5F" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1822" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Charlotte Harbor &amp; Pine Island Sound &middot; Marine Forecast">
 <meta property="og:description" content="Wind, chop, storms, tides, and live radar for Burnt Store to Boca Grande Pass. Updated with every NWS issuance.">
@@ -16,20 +18,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <title>Charlotte Harbor &amp; Pine Island Sound &middot; Marine Forecast</title>
 <style>
-  :root{--navy:#1E3A5F;--accent:#2E86C1;--card:#D6EAF8;--bg:#F4F6F9;--ink:#1A1A2A;
-    --win:#1E8449;--risk:#C0392B;--caution:#D4AC0D;--line:#cfe0ee;--calm:#2E86C1;}
+  :root{color-scheme:light dark;
+    --navy:#1E3A5F;--accent:#2E86C1;--card:#D6EAF8;--bg:#F4F6F9;--ink:#1A1A2A;
+    --win:#1E8449;--risk:#C0392B;--caution:#D4AC0D;--line:#cfe0ee;--calm:#2E86C1;
+    --paper:#ffffff;--head:#1E3A5F;--note:#43606f;--muted:#5a7180;--faint:#8a97a3;}
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
     color:var(--ink);background:var(--bg);padding:22px;font-size:15px}
   .wrap{max-width:1080px;margin:0 auto}
   header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:8px;
     border-bottom:3px solid var(--navy);padding-bottom:12px}
-  h1{margin:0;font-size:1.55rem;letter-spacing:.2px;color:var(--navy)}
+  h1{margin:0;font-size:1.55rem;letter-spacing:.2px;color:var(--head)}
   .sub{color:var(--accent);font-weight:600;font-size:.95rem;margin-top:2px}
-  .issued{font-size:.8rem;color:#5a7180;text-align:right}
+  .issued{font-size:.8rem;color:var(--muted);text-align:right}
   .hdr-right{display:flex;align-items:center;gap:12px}
   .bbmark{flex:0 0 auto}
-  .banner{background:#fff;border:1px solid var(--line);border-left:5px solid var(--win);
+  .banner{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--win);
     border-radius:8px;padding:12px 16px;margin:14px 0 18px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
   .banner b{color:var(--win)}
   .today{background:var(--navy);color:#fff;border-radius:14px;padding:20px 22px;margin-bottom:20px;
@@ -42,11 +46,11 @@
   .compass{width:78px;height:78px;flex:0 0 auto}
   .today .desc{margin-top:12px;font-size:.95rem;line-height:1.45;opacity:.97;max-width:780px}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px}
-  .card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 15px;
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 15px;
     box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:9px;
     transition:transform .12s,box-shadow .12s}
   .card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.10)}
-  .card h3{margin:0;font-size:.86rem;text-transform:uppercase;letter-spacing:.6px;color:var(--navy)}
+  .card h3{margin:0;font-size:.86rem;text-transform:uppercase;letter-spacing:.6px;color:var(--head)}
   .cardrow{display:flex;align-items:center;gap:12px}
   .cardrow .wx{margin-left:auto;flex:0 0 auto}
   .hero-sky{flex:0 0 auto}
@@ -59,45 +63,45 @@
   .radar-card .note a{color:var(--accent);font-weight:600;text-decoration:none}
   .mini{width:52px;height:52px;flex:0 0 auto}
   .wind{font-size:1.1rem;font-weight:700;line-height:1.15}
-  .wind small{display:block;font-size:.72rem;font-weight:600;color:#5a7180;letter-spacing:.4px}
+  .wind small{display:block;font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:.4px}
   .badges{display:flex;flex-wrap:wrap;gap:6px}
   .badge{font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:20px;color:#fff;white-space:nowrap}
   .b-calm{background:var(--accent)} .b-good{background:var(--win)}
   .b-mod{background:var(--caution)} .b-rough{background:var(--risk)}
   .b-storm-lo{background:#8aa0ad} .b-storm-md{background:var(--caution)} .b-storm-hi{background:var(--risk)}
-  .note{font-size:.82rem;color:#43606f;line-height:1.4;border-top:1px dashed var(--line);padding-top:8px}
-  footer{margin-top:22px;font-size:.76rem;color:#6b8494;line-height:1.5;border-top:1px solid var(--line);padding-top:12px}
-  .byline{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--navy);margin-bottom:6px}
+  .note{font-size:.82rem;color:var(--note);line-height:1.4;border-top:1px dashed var(--line);padding-top:8px}
+  footer{margin-top:22px;font-size:.76rem;color:var(--muted);line-height:1.5;border-top:1px solid var(--line);padding-top:12px}
+  .byline{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--head);margin-bottom:6px}
   .sitelinks{margin-bottom:8px;font-size:.8rem}
   .sitelinks a{color:var(--accent);font-weight:600;text-decoration:none}
   .sitelinks a:hover{text-decoration:underline}
-  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:6px 0;font-size:.78rem;color:#43606f}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:6px 0;font-size:.78rem;color:var(--note)}
   .legend span{display:inline-flex;align-items:center;gap:6px}
   .dot{width:11px;height:11px;border-radius:50%}
 
   .secbar{background:var(--navy);color:#fff;font-weight:600;letter-spacing:.4px;
     padding:11px 16px;border-radius:8px;margin:22px 0 14px;font-size:.95rem}
   .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px}
-  .tcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 15px;
+  .tcard{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 15px;
     box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:8px;
     transition:transform .12s,box-shadow .12s}
   .tcard:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.10)}
-  .tcard-h{font-size:.86rem;text-transform:uppercase;letter-spacing:.6px;color:var(--navy);font-weight:700}
+  .tcard-h{font-size:.86rem;text-transform:uppercase;letter-spacing:.6px;color:var(--head);font-weight:700}
   .tides{display:flex;flex-wrap:wrap;gap:8px;font-size:.82rem}
   .tide-ev{white-space:nowrap}
   .tide-h{color:var(--accent)} .tide-l{color:#8a6d3b}
-  .sun{font-size:.78rem;color:#6b8494}
+  .sun{font-size:.78rem;color:var(--muted)}
   .fish{display:flex;align-items:center;gap:8px;border-top:1px dashed var(--line);padding-top:8px}
   .frate{font-size:1rem;line-height:1}
   .flabel{font-size:.82rem;font-weight:700}
   .fish.r1 .flabel{color:#8aa0ad} .fish.r2 .flabel{color:var(--caution)}
   .fish.r3 .flabel{color:var(--win)} .fish.r4 .flabel{color:var(--win)}
-  .fwin{font-size:.8rem;color:#43606f}
-  .fwin small{display:block;color:#8a97a3;font-size:.72rem;margin-top:1px}
+  .fwin{font-size:.8rem;color:var(--note)}
+  .fwin small{display:block;color:var(--faint);font-size:.72rem;margin-top:1px}
   .card{position:relative}
   .card h3{padding-right:56px}
   .wxchip{position:absolute;top:15px;right:15px;line-height:1}
-  .wxchip .temp{font-size:.86rem;font-weight:700;color:var(--navy);letter-spacing:.6px}
+  .wxchip .temp{font-size:.86rem;font-weight:700;color:var(--head);letter-spacing:.6px}
   .advisory{background:#FDEDEC;border:1px solid #E6B0AA;border-left:5px solid var(--risk);
     border-radius:8px;padding:11px 16px;margin:0 0 14px;color:#922B21;font-weight:700;
     font-size:.92rem;letter-spacing:.3px}
@@ -105,19 +109,31 @@
   .trop.t0{background:#EAF2F8;border:1px solid var(--line);color:#31708E}
   .trop.t1{background:#FCF3CF;border:1px solid #F1D97A;color:#7D6608}
   .trop.t2{background:#FDEDEC;border:1px solid #E6B0AA;color:#922B21}
-  .nowstrip{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 16px;
+  .nowstrip{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 16px;
     margin:-8px 0 18px;font-size:.85rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;
     box-shadow:0 2px 8px rgba(0,0,0,.06)}
   .now-lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);
     font-weight:700}
-  .now-val{font-weight:700;color:var(--navy)}
-  .now-src{font-size:.74rem;color:#8a97a3;margin-left:auto}
-  .pop{font-size:.75rem;font-weight:600;color:#5a7180}
+  .now-val{font-weight:700;color:var(--head)}
+  .now-src{font-size:.74rem;color:var(--faint);margin-left:auto}
+  .pop{font-size:.75rem;font-weight:600;color:var(--muted)}
   .metric .vsub{font-size:.72rem;font-weight:600;opacity:.85}
   .wxchip .wx{flex:0 0 auto;display:block}
   .hero-air{display:inline-flex;align-items:center;gap:6px}
   .hero-air .temp{color:#fff}
 
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#0F1822;--ink:#E6EDF3;--line:#2A3B4D;--paper:#16202B;
+      --head:#A9C9E8;--note:#9FB4C4;--muted:#8CA3B5;--faint:#7A8FA0}
+    .radar-card .radartint{display:none}
+    .banner b{color:#58C88C}
+    .fish.r3 .flabel,.fish.r4 .flabel{color:#58C88C}
+    .trop.t0{background:#132433;border-color:#24405A;color:#8FB8DC}
+    .trop.t1{background:#332B10;border-color:#5A4A1A;color:#E0C060}
+    .trop.t2{background:#33150F;border-color:#5E2A20;color:#F1948A}
+    .advisory{background:#33150F;border:1px solid #5E2A20;border-left:5px solid var(--risk);color:#F1948A}
+    .tide-l{color:#C9A76B}
+  }
 </style>
 </head>
 <body>
@@ -128,35 +144,35 @@
       <div class="sub">Marine Forecast &middot; NWS Tampa Bay &middot; Zone GMZ836 &middot; Burnt Store</div>
     </div>
     <div class="hdr-right">
-      <div class="issued">Issued 315 PM EDT Thu Jul 2 2026</div>
+      <div class="issued">Issued 809 PM EDT Thu Jul 2 2026</div>
       <svg class="bbmark" viewBox="0 0 32 32" width="44" height="44" aria-label="Brian Beals"><rect width="32" height="32" rx="7" fill="#1E3A5F"/><text x="16" y="16.5" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="-apple-system,system-ui,sans-serif" font-size="15" font-weight="800" letter-spacing="-0.04em">BB</text></svg>
     </div>
   </header>
 
   
   <div class="banner">
-    <b>Thursday, July 2, 2026.</b> Good boating window: winds
-    5–10 kt and bay chop light through the outlook. Watch the
+    <b>Friday, July 3, 2026.</b> Good boating window: winds
+    5 kt and bay chop light through the outlook. Watch the
     afternoon and evening showers and thunderstorms, which build daily and can spike local seas and gusts.
     Run the pass and any Gulf legs before early afternoon.
   </div>
-  <div class="trop t0">Tropics quiet. No Atlantic development expected in the next 7 days. NHC outlook, 200 PM EDT Thu Jul 2 2026.</div>
+  <div class="trop t0">Tropics quiet. No Atlantic development expected in the next 7 days. NHC outlook, 800 PM EDT Thu Jul 2 2026.</div>
 
   <div class="today">
-    <h2>Today &middot; Tonight</h2>
+    <h2>Today &middot; Friday</h2>
     <div class="row">
-      <svg class="compass" viewBox="0 0 100 100" aria-label="Wind"><circle cx="50" cy="50" r="46" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.5)" stroke-width="2"/><text x="50" y="15" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">N</text><g transform="rotate(270 50 50)"><path d="M50 20 L59 50 L50 43 L41 50 Z" fill="#fff"/><rect x="47.5" y="43" width="5" height="32" fill="#fff"/></g></svg>
-      <div class="metric"><span class="lbl">Wind</span><span class="val">E 5–10 kt</span></div>
-      
+      <svg class="compass" viewBox="0 0 100 100" aria-label="Wind"><circle cx="50" cy="50" r="46" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.5)" stroke-width="2"/><text x="50" y="15" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">N</text><g transform="rotate(315 50 50)"><path d="M50 20 L59 50 L50 43 L41 50 Z" fill="#fff"/><rect x="47.5" y="43" width="5" height="32" fill="#fff"/></g></svg>
+      <div class="metric"><span class="lbl">Wind</span><span class="val">SE 5 kt</span></div>
+      <div class="metric"><span class="lbl">Shift</span><span class="val">&rarr; SW</span></div>
       <div class="metric"><span class="lbl">Water</span><span class="val">Light chop</span></div>
       <div class="metric"><span class="lbl">Storms</span><span class="val">Isolated storms</span></div>
-      <div class="metric"><span class="lbl">Rain</span><span class="val">70%</span><span class="vsub">before 2 AM</span></div>
+      <div class="metric"><span class="lbl">Rain</span><span class="val">60%</span><span class="vsub">after 9 AM</span></div>
       <div class="metric"><span class="lbl">Air</span><span class="val hero-air"><span class="temp">88&deg;F</span></span></div>
       <div class="hero-sky"><svg class="wx" viewBox="0 0 32 24" width="100" height="75" aria-hidden="true"><g fill="#C9D7E2"><circle cx="10" cy="10.5" r="4.5"/><circle cx="16.5" cy="8.5" r="5.5"/><circle cx="22.5" cy="11" r="4"/><rect x="9" y="10.5" width="14.5" height="4.5" rx="2.25"/></g><path d="M16.5 13.5 l-3.5 5 h3 l-2 5.5 6.5 -7 h-3 l2.5 -3.5 z" fill="#F5B301"/></svg></div>
     </div>
-    <div class="desc">East winds 5 to 10 knots. Bay and inland waters light chop. A chance of showers and thunderstorms until early morning. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less, 2 s period. Tides: High 1:33 PM, Low 9:54 PM. Best bite 6:09 AM–8:09 AM (good).</div>
+    <div class="desc">Southeast winds around 5 knots, becoming southwest in the afternoon. Bay and inland waters light chop. A chance of showers and thunderstorms. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less, 2 s period. Tides: High 1:33 PM, Low 9:54 PM. Best bite 6:09 AM–8:09 AM (good).</div>
   </div>
-  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WNW 10 kt, gusting 16 &middot; Air 83&deg;F &middot; Water 90&deg;F &middot; Partly Cloudy</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 3:30 PM</span></div>
+  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind ESE 3 kt, gusting 6 &middot; Air 81&deg;F &middot; Water 90&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 10:06 PM</span></div>
 
   <div class="grid">
     <div class="card radar-card">
@@ -166,12 +182,6 @@
         src="https://radar.weather.gov/ridge/standard/KTBW_loop.gif"><span class="radartint"></span></div>
       <div class="note">NWS Tampa Bay (KTBW) loop, zoomed to the harbor. Refreshes every
         5 minutes with the Right Now strip. <a href="https://radar.weather.gov/station/ktbw/standard">Full view</a>.</div>
-    </div><div class="card">
-      <h3>Friday<span class="wxchip"><span class="temp">H 88&deg;</span></span></h3>
-      <div class="cardrow"><svg class="mini" viewBox="0 0 100 100" aria-label="Wind"><circle cx="50" cy="50" r="46" fill="#eef6fb" stroke="#cfe3ee" stroke-width="2"/><text x="50" y="15" text-anchor="middle" fill="#2E86C1" font-size="12" font-weight="700">N</text><g transform="rotate(315 50 50)"><path d="M50 20 L59 50 L50 43 L41 50 Z" fill="#2E86C1"/><rect x="47.5" y="43" width="5" height="32" fill="#2E86C1"/></g></svg>
-        <div class="wind">SE 5 kt<small>&rarr; SW</small></div><svg class="wx" viewBox="0 0 32 24" width="64" height="48" aria-hidden="true"><g fill="#C9D7E2"><circle cx="10" cy="10.5" r="4.5"/><circle cx="16.5" cy="8.5" r="5.5"/><circle cx="22.5" cy="11" r="4"/><rect x="9" y="10.5" width="14.5" height="4.5" rx="2.25"/></g><path d="M16.5 13.5 l-3.5 5 h3 l-2 5.5 6.5 -7 h-3 l2.5 -3.5 z" fill="#F5B301"/></svg></div>
-      <div class="badges"><span class="badge b-good">Light chop</span><span class="badge b-storm-lo">Isolated storms</span></div><div class="pop">Rain 60% &middot; after 9 AM</div>
-      <div class="note">Southeast winds around 5 knots, becoming southwest in the afternoon. Bay and inland waters light chop. A chance of showers and thunderstorms.</div>
     </div><div class="card">
       <h3>Friday Night<span class="wxchip"><span class="temp">L 78&deg;</span></span></h3>
       <div class="cardrow"><svg class="mini" viewBox="0 0 100 100" aria-label="Wind"><circle cx="50" cy="50" r="46" fill="#eef6fb" stroke="#cfe3ee" stroke-width="2"/><text x="50" y="15" text-anchor="middle" fill="#2E86C1" font-size="12" font-weight="700">N</text><g transform="rotate(90 50 50)"><path d="M50 20 L59 50 L50 43 L41 50 Z" fill="#2E86C1"/><rect x="47.5" y="43" width="5" height="32" fill="#2E86C1"/></g></svg>
@@ -208,6 +218,12 @@
         <div class="wind">SE 5 kt<small>&rarr; SW</small></div><svg class="wx" viewBox="0 0 32 24" width="64" height="48" aria-hidden="true"><g fill="#C9D7E2"><circle cx="10" cy="10.5" r="4.5"/><circle cx="16.5" cy="8.5" r="5.5"/><circle cx="22.5" cy="11" r="4"/><rect x="9" y="10.5" width="14.5" height="4.5" rx="2.25"/></g><path d="M16.5 13.5 l-3.5 5 h3 l-2 5.5 6.5 -7 h-3 l2.5 -3.5 z" fill="#F5B301"/></svg></div>
       <div class="badges"><span class="badge b-good">Light chop</span><span class="badge b-storm-lo">Isolated storms</span></div><div class="pop">Rain 75% &middot; before 2 PM</div>
       <div class="note">Southeast winds around 5 knots, becoming southwest in the afternoon. Bay and inland waters light chop. A chance of showers and thunderstorms in the morning, then showers and thunderstorms likely in the afternoon.</div>
+    </div><div class="card">
+      <h3>Monday Night<span class="wxchip"><span class="temp">L 77&deg;</span></span></h3>
+      <div class="cardrow"><svg class="mini" viewBox="0 0 100 100" aria-label="Wind"><circle cx="50" cy="50" r="46" fill="#eef6fb" stroke="#cfe3ee" stroke-width="2"/><text x="50" y="15" text-anchor="middle" fill="#2E86C1" font-size="12" font-weight="700">N</text><g transform="rotate(315 50 50)"><path d="M50 20 L59 50 L50 43 L41 50 Z" fill="#2E86C1"/><rect x="47.5" y="43" width="5" height="32" fill="#2E86C1"/></g></svg>
+        <div class="wind">SE 5 kt</div><svg class="wx" viewBox="0 0 32 24" width="64" height="48" aria-hidden="true"><g fill="#C9D7E2"><circle cx="10" cy="10.5" r="4.5"/><circle cx="16.5" cy="8.5" r="5.5"/><circle cx="22.5" cy="11" r="4"/><rect x="9" y="10.5" width="14.5" height="4.5" rx="2.25"/></g><path d="M16.5 13.5 l-3.5 5 h3 l-2 5.5 6.5 -7 h-3 l2.5 -3.5 z" fill="#F5B301"/></svg></div>
+      <div class="badges"><span class="badge b-calm">Smooth</span><span class="badge b-storm-md">Storms possible</span></div><div class="pop">Rain 75%</div>
+      <div class="note">Southeast winds around 5 knots. Bay and inland waters smooth. Showers and thunderstorms likely, mainly in the evening.</div>
     </div>
   </div>
 
@@ -265,9 +281,9 @@
     <div class="sitelinks"><a href="https://brianbeals.com">brianbeals.com</a> &middot;
       <a href="https://brianbeals.com/writing">Writing</a> &middot;
       <a href="https://sector.brianbeals.com">Sector Screener</a></div>
-    <div class="byline"><svg viewBox="0 0 32 32" width="16" height="16" aria-label="Brian Beals"><rect width="32" height="32" rx="6" fill="#1E3A5F"/><text x="16" y="15" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="-apple-system,system-ui,sans-serif" font-size="16" font-weight="800" letter-spacing="-0.04em">BB</text></svg>&copy; Brian Beals &middot; brianbeals.com &middot; July 2, 2026</div>
+    <div class="byline"><svg viewBox="0 0 32 32" width="16" height="16" aria-label="Brian Beals"><rect width="32" height="32" rx="6" fill="#1E3A5F"/><text x="16" y="15" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="-apple-system,system-ui,sans-serif" font-size="16" font-weight="800" letter-spacing="-0.04em">BB</text></svg>&copy; Brian Beals &middot; brianbeals.com &middot; July 3, 2026</div>
     <p>Wind and seas: NOAA / NWS Tampa Bay Ruskin FL, Coastal Waters Forecast (product CWFTBW), issued
-    315 PM EDT Thu Jul 2 2026. Bay and inland water state is reported as chop; Gulf seas shown from adjacent
+    809 PM EDT Thu Jul 2 2026. Bay and inland water state is reported as chop; Gulf seas shown from adjacent
     zone GMZ856. Tides: NOAA CO-OPS, Port Boca Grande (station 8725577), datum MLLW.
     Fishing quick-glance is a rule of thumb from tidal movement and dawn/dusk light, not a guarantee.
     Winds and seas are higher in and near thunderstorms. This page is for planning, not for navigation;
