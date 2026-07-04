@@ -56,9 +56,16 @@
   .hero-sky{flex:0 0 auto}
   .radar-card .radarwrap{overflow:hidden;border-radius:6px;aspect-ratio:6/5;
     background:#dfe9f2;position:relative;border:1px solid var(--line)}
-  .radar-card img{position:absolute;width:330%;height:auto;left:-129.9%;top:-205.9%}
-  .radar-card .radartint{position:absolute;inset:0;background:#dde9f3;
-    mix-blend-mode:multiply;pointer-events:none}
+  .radar-card .radarpan{position:absolute;left:0;top:-14.14%;width:100%;aspect-ratio:3/4}
+  .radarpan img.tile{position:absolute;width:33.4%;height:25.05%}
+  .radarpan img.frame{position:absolute;inset:0;width:100%;height:100%;opacity:0}
+  .radarpan img.frame.on{opacity:1}
+  .radar-card .homedot{position:absolute;left:54.25%;top:42.36%;width:9px;height:9px;
+    margin:-5px 0 0 -5px;border-radius:50%;background:#E4572E;border:2px solid #fff;
+    box-shadow:0 0 4px rgba(0,0,0,.45);z-index:3;pointer-events:none}
+  .radar-card .radarstamp{position:absolute;right:6px;bottom:6px;z-index:4;
+    font-size:.68rem;font-weight:700;color:#fff;background:rgba(15,24,34,.62);
+    padding:2px 8px;border-radius:10px;letter-spacing:.3px}
   .radar-card .wxchip .temp{color:var(--risk)}
   .radar-card .note a{color:var(--accent);font-weight:600;text-decoration:none}
   .mini{width:52px;height:52px;flex:0 0 auto}
@@ -125,7 +132,7 @@
   @media (prefers-color-scheme: dark){
     :root{--bg:#0F1822;--ink:#E6EDF3;--line:#2A3B4D;--paper:#16202B;
       --head:#A9C9E8;--note:#9FB4C4;--muted:#8CA3B5;--faint:#7A8FA0}
-    .radar-card .radartint{display:none}
+    .radar-card .radarwrap{background:#0d141c}
     .banner b{color:#58C88C}
     .fish.r3 .flabel,.fish.r4 .flabel{color:#58C88C}
     .trop.t0{background:#132433;border-color:#24405A;color:#8FB8DC}
@@ -172,16 +179,20 @@
     </div>
     <div class="desc">Southwest winds 5 to 10 knots, becoming west late. Bay and inland waters light chop. A chance of showers and thunderstorms. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less. Tides: High 5:59 AM, Low 8:57 AM, High 2:48 PM, Low 10:54 PM. Best bite 6:28 AM–8:28 AM (good).</div>
   </div>
-  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WSW 5 kt, gusting 7 &middot; Air 84&deg;F &middot; Water 88&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 10:42 AM</span></div>
+  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WSW 6 kt, gusting 7 &middot; Air 88&deg;F &middot; Water 88&deg;F &middot; Mostly Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 12:18 PM</span></div>
 
   <div class="grid">
     <div class="card radar-card">
       <h3>Radar &middot; Charlotte Harbor<span class="wxchip"><span class="temp">LIVE</span></span></h3>
-      <div class="radarwrap"><img id="radarimg" alt="NWS Tampa Bay (KTBW) radar loop, zoomed to Charlotte Harbor"
-        data-src="https://radar.weather.gov/ridge/standard/KTBW_loop.gif"
-        src="https://radar.weather.gov/ridge/standard/KTBW_loop.gif"><span class="radartint"></span></div>
-      <div class="note">NWS Tampa Bay (KTBW) loop, zoomed to the harbor. Refreshes every
-        5 minutes with the Right Now strip. <a href="https://radar.weather.gov/station/ktbw/standard">Full view</a>.</div>
+      <div class="radarwrap" role="img"
+        aria-label="Animated NEXRAD radar, last 50 minutes, Charlotte Harbor and Pine Island Sound">
+        <div class="radarpan" id="radarpan"></div>
+        <span class="homedot" title="Punta Gorda"></span>
+        <span class="radarstamp" id="radarstamp">&hellip;</span>
+      </div>
+      <div class="note">NEXRAD composite (NWS via Iowa State Mesonet), last 50 minutes,
+        animated. Refreshes every 5 minutes. Basemap &copy; OpenStreetMap contributors
+        &copy; CARTO. <a href="https://radar.weather.gov/station/ktbw/standard">Full KTBW view</a>.</div>
     </div><div class="card">
       <h3>Tonight<span class="wxchip"><span class="temp">L 77&deg;</span></span></h3>
       <div class="cardrow"><svg class="mini" viewBox="0 0 100 100" aria-label="Wind"><circle cx="50" cy="50" r="46" fill="#eef6fb" stroke="#cfe3ee" stroke-width="2"/><text x="50" y="15" text-anchor="middle" fill="#2E86C1" font-size="12" font-weight="700">N</text><g transform="rotate(45 50 50)"><path d="M50 20 L59 50 L50 43 L41 50 Z" fill="#2E86C1"/><rect x="47.5" y="43" width="5" height="32" fill="#2E86C1"/></g></svg>
@@ -293,7 +304,6 @@
 <script>
 (() => {
   const strip = document.querySelector(".nowstrip");
-  const radar = document.getElementById("radarimg");
   const base = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter" +
     "?station=8725520&date=latest&time_zone=lst_ldt&units=english&format=json&product=";
   const kpgd = "https://api.weather.gov/stations/KPGD/observations/latest";
@@ -329,14 +339,63 @@
         " (nearest live obs), " + hh + ":" + String(mm).padStart(2, "0") + " " + ap;
     }
   }
-  let first = true;
   async function refresh() {
-    if (radar && !first) radar.src = radar.dataset.src + "?t=" + Date.now();
-    first = false;
     if (strip) { try { await refreshObs(); } catch (e) {} }
   }
   refresh();
   setInterval(refresh, 300000);
+})();
+</script>
+<script>
+(() => {
+  const pan = document.getElementById("radarpan");
+  const stamp = document.getElementById("radarstamp");
+  if (!pan) return;
+  const Z = 10, X0 = 277, Y0 = 431, COLS = 3, ROWS = 4;
+  const BBOX = "-9196903.2,3013453.4,-9079496.0,3169996.4";
+  const WMS = "https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0q.cgi" +
+    "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&FORMAT=image/png" +
+    "&TRANSPARENT=true&SRS=EPSG:3857&WIDTH=768&HEIGHT=1024&BBOX=" + BBOX + "&LAYERS=";
+  const OFFS = [50, 40, 30, 20, 10, 0];
+  const mqDark = window.matchMedia("(prefers-color-scheme: dark)");
+  const tiles = [], frames = [];
+  for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+    const t = new Image();
+    t.className = "tile"; t.alt = "";
+    t.style.left = (c * 100 / COLS) + "%";
+    t.style.top = (r * 100 / ROWS) + "%";
+    pan.appendChild(t); tiles.push({t, c, r});
+  }
+  for (const off of OFFS) {
+    const f = new Image();
+    f.className = "frame"; f.alt = "";
+    pan.appendChild(f); frames.push({f, off});
+  }
+  const baseStyle = () => mqDark.matches ? "dark_all" : "rastertiles/voyager";
+  function loadBase() {
+    for (const {t, c, r} of tiles)
+      t.src = "https://basemaps.cartocdn.com/" + baseStyle() + "/" +
+        Z + "/" + (X0 + c) + "/" + (Y0 + r) + ".png";
+  }
+  function loadFrames() {
+    const bucket = Math.floor(Date.now() / 300000);
+    for (const {f, off} of frames)
+      f.src = WMS +
+        (off ? "nexrad-n0q-m" + String(off).padStart(2, "0") + "m" : "nexrad-n0q") +
+        "&_=" + bucket;
+  }
+  let idx = 0;
+  function step() {
+    frames.forEach(({f}, i) => f.classList.toggle("on", i === idx));
+    const off = frames[idx].off;
+    stamp.textContent = off ? "\u2212" + off + " min" : "now";
+    const hold = idx === frames.length - 1 ? 1500 : 480;
+    idx = (idx + 1) % frames.length;
+    setTimeout(step, hold);
+  }
+  mqDark.addEventListener("change", loadBase);
+  loadBase(); loadFrames(); step();
+  setInterval(loadFrames, 300000);
 })();
 </script>
 </body>
