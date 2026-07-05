@@ -21,16 +21,27 @@ GitHub Actions (`.github/workflows/publish.yml`) polls every 10 minutes
 through the hour after each expected NWS issuance (about 3:15 and 9:15, AM
 and PM Eastern). `build.py` exits without committing when the fetched
 issuance is already published, so only a new product produces a commit.
-GitHub Pages serves the repo root at the `CNAME` domain. The published page
-also refreshes its "Right now" observations client-side on every load.
+GitHub Pages serves the repo root at the `CNAME` domain.
 
-## Script sync
+The rendered page carries a condition-based verdict line (chop, storm risk,
+and rain scored into a plain go / caution / marginal call) and does its own
+live work in the browser on load and every five minutes:
 
-`scripts/render_forecast.py` and `scripts/marine_extras.py` are copies. The
-canonical source is `brianbeals/claude-skills` →
-`skills/marine-forecast/scripts/` (used interactively by the Cowork
-`marine-forecast` skill). When the canonical scripts change, re-copy both
-files here, keeping the `# SYNC:` header.
+- Refreshes the "Right now" observations (CO-OPS wind and water, KPGD sky).
+- Animates the harbor-cropped NEXRAD loop.
+- Samples NEXRAD reflectivity at several harbor points (Boca Grande Pass,
+  Charlotte Harbor, Pine Island Sound, Burnt Store) off the same IEM frames,
+  classifies each by the n0q color ramp, and posts a live storm ribbon over
+  the banner when a cell is on the water. This catches convection sitting on
+  the harbor that the inland KPGD observation alone would miss. Canvas
+  readback works because IEM serves CORS headers.
+
+## Source of truth
+
+This repo is canonical. The `scripts/` here are what runs. The project began
+as the Cowork `marine-forecast` skill in `brianbeals/claude-skills`, but has
+since migrated to git; that skill copy is legacy and is no longer synced from.
+Edit the scripts here.
 
 ## Local run
 
