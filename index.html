@@ -41,6 +41,13 @@
     font-weight:600;line-height:1.45;border:1px solid;border-left-width:5px}
   .livealert.lv-hi{background:#FDEDEC;border-color:#E6B0AA;border-left-color:var(--risk);color:#922B21}
   .livealert.lv-mid{background:#FEF9E7;border-color:#F7DC6F;border-left-color:var(--caution);color:#7D6608}
+  #nwsAlerts{margin-top:14px}
+  .nwsalert{padding:12px 15px;border-radius:8px;margin:0 0 8px;line-height:1.4;
+    border:1px solid;border-left-width:5px}
+  .nwsalert .ev{display:block;font-size:.95rem;font-weight:700;letter-spacing:.3px}
+  .nwsalert .hl{display:block;font-size:.83rem;font-weight:500;margin-top:3px}
+  .nwsalert.nws-warn{background:#FDEDEC;border-color:#E6B0AA;border-left-color:var(--risk);color:#922B21}
+  .nwsalert.nws-adv{background:#FEF9E7;border-color:#F7DC6F;border-left-color:var(--caution);color:#7D6608}
   .today{background:var(--navy);color:#fff;border-radius:14px;padding:20px 22px;margin-bottom:20px;
     box-shadow:0 6px 18px rgba(30,58,95,.28)}
   .today h2{margin:0 0 4px;font-size:1.1rem;letter-spacing:.5px;text-transform:uppercase;opacity:.95}
@@ -146,6 +153,8 @@
     .advisory{background:#33150F;border:1px solid #5E2A20;border-left:5px solid var(--risk);color:#F1948A}
     .livealert.lv-hi{background:#33150F;border-color:#5E2A20;color:#F1948A}
     .livealert.lv-mid{background:#332B10;border-color:#5A4A1A;color:#E0C060}
+    .nwsalert.nws-warn{background:#33150F;border-color:#5E2A20;color:#F1948A}
+    .nwsalert.nws-adv{background:#332B10;border-color:#5A4A1A;color:#E0C060}
     .tide-l{color:#C9A76B}
   }
 </style>
@@ -183,7 +192,7 @@
     </div>
     <div class="desc">Southwest winds 5 to 10 knots, becoming west late. Bay and inland waters light chop. Scattered showers and thunderstorms. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less. Tides: High 6:18 AM, Low 10:25 AM, High 3:40 PM, Low 11:19 PM. Best bite 6:29 PM–8:29 PM (fair).</div>
   </div>
-  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WNW 11 kt, gusting 12 &middot; Air 85&deg;F &middot; Water 88&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 9:30 AM</span></div>
+  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WNW 8 kt, gusting 11 &middot; Air 84&deg;F &middot; Water 87&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 9:48 AM</span></div>
 
   <div class="grid">
     <div class="card radar-card">
@@ -375,6 +384,39 @@
     });
   }
 
+  // --- Official NWS active alerts for the marine zones (harbor + Gulf run).
+  // Authoritative source for Special Marine Warnings, Small Craft Advisories,
+  // etc. issued between the 4x/day forecast builds. Renders above everything;
+  // when the live feed loads it supersedes the baked CWF advisory headline.
+  const ALERTS = "https://api.weather.gov/alerts/active?zone=GMZ836,GMZ856";
+  const SEVRANK = { Extreme: 4, Severe: 3, Moderate: 2, Minor: 1, Unknown: 0 };
+  function esc(s) { return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  async function renderNwsAlerts() {
+    let data = null;
+    try { const r = await fetch(ALERTS); if (r.ok) data = await r.json(); } catch (e) {}
+    if (!data) return { ok: false, hasStormWarning: false };  // network fail: keep baked advisory
+    const feats = (data.features || []).filter(f => f.properties && f.properties.messageType !== "Cancel");
+    // Live feed is authoritative, so retire the baked CWF advisory headline.
+    document.querySelectorAll(".advisory").forEach(el => { el.style.display = "none"; });
+    let box = document.getElementById("nwsAlerts");
+    if (!box) { box = document.createElement("div"); box.id = "nwsAlerts"; const h = document.querySelector("header"); if (h) h.insertAdjacentElement("afterend", box); }
+    if (!feats.length) { box.innerHTML = ""; return { ok: true, hasStormWarning: false }; }
+    feats.sort((a, b) => (SEVRANK[b.properties.severity] || 0) - (SEVRANK[a.properties.severity] || 0));
+    const seen = new Set(); let html = "", storm = false;
+    for (const f of feats) {
+      const p = f.properties, ev = p.event || "Alert";
+      if (seen.has(ev)) continue; seen.add(ev);
+      const warn = p.severity === "Extreme" || p.severity === "Severe" || /warning/i.test(ev);
+      if (warn) storm = true;
+      const cls = warn ? "nws-warn" : "nws-adv";
+      const hl = esc(p.headline || "");
+      html += '<div class="nwsalert ' + cls + '"><span class="ev">\u26A0 ' + esc(ev) + '</span>' +
+              (hl ? '<span class="hl">' + hl + '</span>' : '') + '</div>';
+    }
+    box.innerHTML = html;
+    return { ok: true, hasStormWarning: storm };
+  }
+
   async function refreshObs() {
     const [w, a, t, m] = await Promise.all([
       ...["wind", "air_temperature", "water_temperature"].map(
@@ -414,21 +456,23 @@
   // One ribbon, fed by both signals. Radar over the water wins; the airport
   // METAR and live gusts are the fallback. The ribbon dims the baked banner,
   // which was issued hours earlier.
-  function renderAlert(radar, cond, gust) {
+  function renderAlert(radar, cond, gust, suppress) {
     if (!banner) return;
     let msg = "", cls = "";
-    if (radar && radar.sev === 2) {
-      msg = "Storm core over " + radar.where + " on radar right now. The window below was issued earlier today.";
-      cls = "lv-hi";
-    } else if (radar && radar.sev === 1) {
-      msg = "Heavy showers over " + radar.where + " on radar right now.";
-      cls = "lv-mid";
-    } else if (/thunder|\bstorm|squall|\brain|shower/i.test(cond)) {
-      msg = cond + " at Punta Gorda right now. The window below was issued earlier today.";
-      cls = "lv-hi";
-    } else if (gust >= 22) {
-      msg = "Wind gusting " + gust + " kt right now, stronger than the forecast. Check before running the pass.";
-      cls = "lv-mid";
+    if (!suppress) {                              // an official storm warning already covers it
+      if (radar && radar.sev === 2) {
+        msg = "Storm core over " + radar.where + " on radar right now. The window below was issued earlier today.";
+        cls = "lv-hi";
+      } else if (radar && radar.sev === 1) {
+        msg = "Heavy showers over " + radar.where + " on radar right now.";
+        cls = "lv-mid";
+      } else if (/thunder|\bstorm|squall|\brain|shower/i.test(cond)) {
+        msg = cond + " at Punta Gorda right now. The window below was issued earlier today.";
+        cls = "lv-hi";
+      } else if (gust >= 22) {
+        msg = "Wind gusting " + gust + " kt right now, stronger than the forecast. Check before running the pass.";
+        cls = "lv-mid";
+      }
     }
     let rib = document.getElementById("liveAlert");
     if (msg) {
@@ -449,9 +493,11 @@
   async function refresh() {
     let obs = { cond: "", gust: 0 };
     try { if (strip) obs = await refreshObs(); } catch (e) {}
+    let nws = { ok: false, hasStormWarning: false };
+    try { nws = await renderNwsAlerts(); } catch (e) {}
     let radar = { sev: -1, where: "" };
     try { radar = await sampleRadar(); } catch (e) {}
-    renderAlert(radar, obs.cond, obs.gust);
+    renderAlert(radar, obs.cond, obs.gust, nws.hasStormWarning);
   }
   refresh();
   setInterval(refresh, 300000);
