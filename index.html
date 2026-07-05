@@ -36,7 +36,6 @@
   .banner{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--win);
     border-radius:8px;padding:12px 16px;margin:14px 0 18px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
   .banner b{color:var(--win)}
-  .banner.superseded{opacity:.55}
   .livealert{padding:11px 15px;border-radius:8px;margin:14px 0 12px;font-size:.9rem;
     font-weight:600;line-height:1.45;border:1px solid;border-left-width:5px}
   .livealert.lv-hi{background:#FDEDEC;border-color:#E6B0AA;border-left-color:var(--risk);color:#922B21}
@@ -192,7 +191,7 @@
     </div>
     <div class="desc">Southwest winds 5 to 10 knots, becoming west late. Bay and inland waters light chop. Scattered showers and thunderstorms. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less. Tides: High 6:18 AM, Low 10:25 AM, High 3:40 PM, Low 11:19 PM. Best bite 6:29 PM–8:29 PM (fair).</div>
   </div>
-  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WNW 9 kt, gusting 11 &middot; Air 84&deg;F &middot; Water 87&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 9:54 AM</span></div>
+  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WNW 7 kt, gusting 10 &middot; Air 84&deg;F &middot; Water 87&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 10:00 AM</span></div>
 
   <div class="grid">
     <div class="card radar-card">
@@ -483,10 +482,8 @@
       }
       rib.className = "livealert " + cls;
       rib.textContent = "\u26A0 Live: " + msg;
-      banner.classList.add("superseded");
     } else if (rib) {
       rib.remove();
-      banner.classList.remove("superseded");
     }
   }
 
