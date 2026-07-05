@@ -66,7 +66,7 @@
   .cardrow .wx{margin-left:auto;flex:0 0 auto}
   .hero-sky{flex:0 0 auto}
   .radar-card .radarwrap{overflow:hidden;border-radius:6px;aspect-ratio:6/5;
-    background:#0b1016;position:relative;border:1px solid var(--line)}
+    background:#dfe9f2;position:relative;border:1px solid var(--line)}
   .radar-card .radarpan{position:absolute;left:0;top:-14.14%;width:100%;aspect-ratio:3/4}
   .radarpan img.tile{position:absolute;width:33.4%;height:25.05%}
   .radarpan img.labeltile{position:absolute;width:33.4%;height:25.05%;pointer-events:none}
@@ -192,7 +192,7 @@
     </div>
     <div class="desc">Southwest winds around 5 knots, becoming south late this evening and overnight. Bay and inland waters smooth. Isolated showers and thunderstorms early this evening. Scattered showers with isolated thunderstorms after midnight. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less, 3 s period. Tides: High 6:18 AM, Low 10:25 AM, High 3:40 PM, Low 11:19 PM. Best bite 6:29 PM–8:29 PM (fair).</div>
   </div>
-  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WNW 7 kt, gusting 10 &middot; Air 83&deg;F &middot; Water 90&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 3:54 PM</span></div>
+  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind NW 5 kt, gusting 7 &middot; Air 84&deg;F &middot; Water 90&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 4:00 PM</span></div>
 
   <div class="grid">
     <div class="card radar-card">
@@ -535,13 +535,22 @@
     l.style.top = (r * 100 / ROWS) + "%";
     pan.appendChild(l); labels.push({l, c, r});
   }
-  // Near-black base in both page themes; radar reads best over dark.
-  const CARTO = "https://basemaps.cartocdn.com/";
+  // Basemap follows the page theme: Esri World Street (blue water, roads,
+  // labels) by day; Esri Dark Gray canvas by night, with its transparent
+  // reference layer (coastline, roads, labels) riding ABOVE the radar so
+  // geography survives a heavy cell. Street bakes its labels into the base,
+  // so the day theme needs no separate overlay. Esri tiles are z/y/x.
+  const ESRI = "https://services.arcgisonline.com/ArcGIS/rest/services/";
+  const etile = (svc, z, x, y) => ESRI + svc + "/MapServer/tile/" + z + "/" + y + "/" + x;
   function loadBase() {
+    const dark = mqDark.matches;
+    const baseSvc = dark ? "Canvas/World_Dark_Gray_Base" : "World_Street_Map";
     for (const {t, c, r} of tiles)
-      t.src = CARTO + "dark_nolabels/" + Z + "/" + (X0 + c) + "/" + (Y0 + r) + ".png";
-    for (const {l, c, r} of labels)
-      l.src = CARTO + "dark_only_labels/" + Z + "/" + (X0 + c) + "/" + (Y0 + r) + ".png";
+      t.src = etile(baseSvc, Z, X0 + c, Y0 + r);
+    for (const {l, c, r} of labels) {
+      if (dark) { l.style.display = ""; l.src = etile("Canvas/World_Dark_Gray_Reference", Z, X0 + c, Y0 + r); }
+      else { l.style.display = "none"; l.removeAttribute("src"); }
+    }
   }
   function loadFrames() {
     const bucket = Math.floor(Date.now() / 300000);
