@@ -36,6 +36,8 @@
   .banner{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--win);
     border-radius:8px;padding:12px 16px;margin:14px 0 18px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
   .banner b{color:var(--win)}
+  .banner.superseded{opacity:.55}
+  .livealert{margin:14px 0 12px}
   .today{background:var(--navy);color:#fff;border-radius:14px;padding:20px 22px;margin-bottom:20px;
     box-shadow:0 6px 18px rgba(30,58,95,.28)}
   .today h2{margin:0 0 4px;font-size:1.1rem;letter-spacing:.5px;text-transform:uppercase;opacity:.95}
@@ -158,12 +160,9 @@
 
   
   <div class="banner">
-    <b>Sunday, July 5, 2026.</b> Good boating window: winds
-    5 kt and bay chop light through the outlook. Watch the
-    afternoon and evening showers and thunderstorms, which build daily and can spike local seas and gusts.
-    Run the pass and any Gulf legs before early afternoon.
+    <b>Sunday, July 5, 2026.</b> Boatable, but keep an eye on the sky. Winds 5 kt, light chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 45%. Run the pass and any Gulf legs before early afternoon.
   </div>
-  <div class="trop t0">Tropics quiet. No Atlantic development expected in the next 7 days. NHC outlook, 200 AM EDT Sun Jul 5 2026.</div>
+  <div class="trop t0">Tropics quiet. No Atlantic development expected in the next 7 days. NHC outlook, 800 AM EDT Sun Jul 5 2026.</div>
 
   <div class="today">
     <h2>Today &middot; Sunday</h2>
@@ -179,7 +178,7 @@
     </div>
     <div class="desc">South winds around 5 knots, becoming southwest this afternoon. Bay and inland waters light chop. Scattered showers and thunderstorms. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less, 2 s period. Tides: High 6:18 AM, Low 10:25 AM, High 3:40 PM, Low 11:19 PM. Best bite 6:29 PM–8:29 PM (fair).</div>
   </div>
-  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind ENE 2 kt, gusting 4 &middot; Air 80&deg;F &middot; Water 88&deg;F &middot; Fog/Mist</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 5:42 AM</span></div>
+  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind NW 8 kt, gusting 9 &middot; Air 82&deg;F &middot; Water 88&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 9:12 AM</span></div>
 
   <div class="grid">
     <div class="card radar-card">
@@ -313,10 +312,11 @@
         p => fetch(base + p).then(r => r.json()).catch(() => null)),
       fetch(kpgd).then(r => r.json()).catch(() => null)]);
     const bits = [];
-    let ts = "", station = "";
+    let ts = "", station = "", gust = 0;
     if (w && w.data && w.data[0] && w.data[0].s) {
       const d = w.data[0];
       const s = Math.round(parseFloat(d.s)), g = Math.round(parseFloat(d.g || 0));
+      gust = g;
       bits.push("Wind " + d.dr + " " + s + " kt" + (g > s ? ", gusting " + g : ""));
       ts = d.t; station = w.metadata && w.metadata.name || "";
     }
@@ -337,6 +337,30 @@
       strip.querySelector(".now-src").textContent =
         station + " station" + (cond ? " & Punta Gorda airport" : "") +
         " (nearest live obs), " + hh + ":" + String(mm).padStart(2, "0") + " " + ap;
+    }
+    // Live override: current storms/rain or strong gusts post a caution ribbon
+    // above the baked forecast banner, which was issued hours earlier.
+    const banner = document.querySelector(".banner");
+    if (banner) {
+      let msg = "";
+      if (/thunder|\bstorm|squall|\brain|shower/i.test(cond))
+        msg = cond + " over the harbor right now. The window below was issued earlier today.";
+      else if (gust >= 22)
+        msg = "Wind gusting " + gust + " kt right now, stronger than the forecast. Check before running the pass.";
+      let rib = document.getElementById("liveAlert");
+      if (msg) {
+        if (!rib) {
+          rib = document.createElement("div");
+          rib.id = "liveAlert";
+          rib.className = "advisory livealert";
+          banner.parentNode.insertBefore(rib, banner);
+        }
+        rib.textContent = "\u26A0 Live: " + msg;
+        banner.classList.add("superseded");
+      } else if (rib) {
+        rib.remove();
+        banner.classList.remove("superseded");
+      }
     }
   }
   async function refresh() {
