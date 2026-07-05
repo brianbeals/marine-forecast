@@ -37,7 +37,10 @@
     border-radius:8px;padding:12px 16px;margin:14px 0 18px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
   .banner b{color:var(--win)}
   .banner.superseded{opacity:.55}
-  .livealert{margin:14px 0 12px}
+  .livealert{padding:11px 15px;border-radius:8px;margin:14px 0 12px;font-size:.9rem;
+    font-weight:600;line-height:1.45;border:1px solid;border-left-width:5px}
+  .livealert.lv-hi{background:#FDEDEC;border-color:#E6B0AA;border-left-color:var(--risk);color:#922B21}
+  .livealert.lv-mid{background:#FEF9E7;border-color:#F7DC6F;border-left-color:var(--caution);color:#7D6608}
   .today{background:var(--navy);color:#fff;border-radius:14px;padding:20px 22px;margin-bottom:20px;
     box-shadow:0 6px 18px rgba(30,58,95,.28)}
   .today h2{margin:0 0 4px;font-size:1.1rem;letter-spacing:.5px;text-transform:uppercase;opacity:.95}
@@ -141,6 +144,8 @@
     .trop.t1{background:#332B10;border-color:#5A4A1A;color:#E0C060}
     .trop.t2{background:#33150F;border-color:#5E2A20;color:#F1948A}
     .advisory{background:#33150F;border:1px solid #5E2A20;border-left:5px solid var(--risk);color:#F1948A}
+    .livealert.lv-hi{background:#33150F;border-color:#5E2A20;color:#F1948A}
+    .livealert.lv-mid{background:#332B10;border-color:#5A4A1A;color:#E0C060}
     .tide-l{color:#C9A76B}
   }
 </style>
@@ -153,32 +158,32 @@
       <div class="sub">Marine Forecast &middot; NWS Tampa Bay &middot; Zone GMZ836 &middot; Burnt Store</div>
     </div>
     <div class="hdr-right">
-      <div class="issued">Issued 316 AM EDT Sun Jul 5 2026</div>
+      <div class="issued">Issued 930 AM EDT Sun Jul 5 2026</div>
       <svg class="bbmark" viewBox="0 0 32 32" width="44" height="44" aria-label="Brian Beals"><rect width="32" height="32" rx="7" fill="#1E3A5F"/><text x="16" y="16.5" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="-apple-system,system-ui,sans-serif" font-size="15" font-weight="800" letter-spacing="-0.04em">BB</text></svg>
     </div>
   </header>
 
   
   <div class="banner">
-    <b>Sunday, July 5, 2026.</b> Boatable, but keep an eye on the sky. Winds 5 kt, light chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 45%. Run the pass and any Gulf legs before early afternoon.
+    <b>Sunday, July 5, 2026.</b> Boatable, but keep an eye on the sky. Winds 5–10 kt, light chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 45%. Run the pass and any Gulf legs before early afternoon.
   </div>
   <div class="trop t0">Tropics quiet. No Atlantic development expected in the next 7 days. NHC outlook, 800 AM EDT Sun Jul 5 2026.</div>
 
   <div class="today">
     <h2>Today &middot; Sunday</h2>
     <div class="row">
-      <svg class="compass" viewBox="0 0 100 100" aria-label="Wind"><circle cx="50" cy="50" r="46" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.5)" stroke-width="2"/><text x="50" y="15" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">N</text><g transform="rotate(0 50 50)"><path d="M50 20 L59 50 L50 43 L41 50 Z" fill="#fff"/><rect x="47.5" y="43" width="5" height="32" fill="#fff"/></g></svg>
-      <div class="metric"><span class="lbl">Wind</span><span class="val">S 5 kt</span></div>
-      <div class="metric"><span class="lbl">Shift</span><span class="val">&rarr; SW</span></div>
+      <svg class="compass" viewBox="0 0 100 100" aria-label="Wind"><circle cx="50" cy="50" r="46" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.5)" stroke-width="2"/><text x="50" y="15" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">N</text><g transform="rotate(45 50 50)"><path d="M50 20 L59 50 L50 43 L41 50 Z" fill="#fff"/><rect x="47.5" y="43" width="5" height="32" fill="#fff"/></g></svg>
+      <div class="metric"><span class="lbl">Wind</span><span class="val">SW 5–10 kt</span></div>
+      <div class="metric"><span class="lbl">Shift</span><span class="val">&rarr; W</span></div>
       <div class="metric"><span class="lbl">Water</span><span class="val">Light chop</span></div>
       <div class="metric"><span class="lbl">Storms</span><span class="val">Scattered storms</span></div>
       <div class="metric"><span class="lbl">Rain</span><span class="val">45%</span></div>
       <div class="metric"><span class="lbl">Air</span><span class="val hero-air"><span class="temp">88&deg;F</span></span></div>
       <div class="hero-sky"><svg class="wx" viewBox="0 0 32 24" width="100" height="75" aria-hidden="true"><g fill="#C9D7E2"><circle cx="10" cy="10.5" r="4.5"/><circle cx="16.5" cy="8.5" r="5.5"/><circle cx="22.5" cy="11" r="4"/><rect x="9" y="10.5" width="14.5" height="4.5" rx="2.25"/></g><path d="M16.5 13.5 l-3.5 5 h3 l-2 5.5 6.5 -7 h-3 l2.5 -3.5 z" fill="#F5B301"/></svg></div>
     </div>
-    <div class="desc">South winds around 5 knots, becoming southwest this afternoon. Bay and inland waters light chop. Scattered showers and thunderstorms. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less, 2 s period. Tides: High 6:18 AM, Low 10:25 AM, High 3:40 PM, Low 11:19 PM. Best bite 6:29 PM–8:29 PM (fair).</div>
+    <div class="desc">Southwest winds 5 to 10 knots, becoming west late. Bay and inland waters light chop. Scattered showers and thunderstorms. Boca Grande Pass / Gulf side (GMZ856): seas 1 foot or less. Tides: High 6:18 AM, Low 10:25 AM, High 3:40 PM, Low 11:19 PM. Best bite 6:29 PM–8:29 PM (fair).</div>
   </div>
-  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind NW 8 kt, gusting 9 &middot; Air 82&deg;F &middot; Water 88&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 9:12 AM</span></div>
+  <div class="nowstrip"><span class="now-lbl">Right now</span><span class="now-val">Wind WNW 11 kt, gusting 12 &middot; Air 85&deg;F &middot; Water 88&deg;F &middot; Clear</span><span class="now-src">Fort Myers station &amp; Punta Gorda airport (nearest live obs), 9:30 AM</span></div>
 
   <div class="grid">
     <div class="card radar-card">
@@ -293,7 +298,7 @@
       <a href="https://sector.brianbeals.com">Sector Screener</a></div>
     <div class="byline"><svg viewBox="0 0 32 32" width="16" height="16" aria-label="Brian Beals"><rect width="32" height="32" rx="6" fill="#1E3A5F"/><text x="16" y="15" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="-apple-system,system-ui,sans-serif" font-size="16" font-weight="800" letter-spacing="-0.04em">BB</text></svg>&copy; Brian Beals &middot; brianbeals.com &middot; July 5, 2026</div>
     <p>Wind and seas: NOAA / NWS Tampa Bay Ruskin FL, Coastal Waters Forecast (product CWFTBW), issued
-    316 AM EDT Sun Jul 5 2026. Bay and inland water state is reported as chop; Gulf seas shown from adjacent
+    930 AM EDT Sun Jul 5 2026. Bay and inland water state is reported as chop; Gulf seas shown from adjacent
     zone GMZ856. Tides: NOAA CO-OPS, Port Boca Grande (station 8725577), datum MLLW.
     Fishing quick-glance is a rule of thumb from tidal movement and dawn/dusk light, not a guarantee.
     Winds and seas are higher in and near thunderstorms. This page is for planning, not for navigation;
@@ -303,9 +308,73 @@
 <script>
 (() => {
   const strip = document.querySelector(".nowstrip");
+  const banner = document.querySelector(".banner");
   const base = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter" +
     "?station=8725520&date=latest&time_zone=lst_ldt&units=english&format=json&product=";
   const kpgd = "https://api.weather.gov/stations/KPGD/observations/latest";
+
+  // --- Radar over-the-water sampling: same IEM n0q source the radar card uses.
+  // Sample a handful of harbor points on the newest frame, classify each by the
+  // n0q color ramp (yellow/orange = heavy showers, red/magenta/white = storm
+  // core), and take the worst. Catches a cell sitting on the water that the
+  // Punta Gorda airport METAR alone would miss. Canvas readback works because
+  // IEM serves CORS headers (verified).
+  const RBASE = "https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0q.cgi";
+  const RMINX = -9196903.2, RMINY = 3013453.4, RMAXX = -9079496.0, RMAXY = 3169996.4;
+  const RW = 768, RH = 1024, REARTH = 6378137;
+  const POINTS = [
+    ["Boca Grande Pass", 26.72, -82.26],
+    ["Charlotte Harbor", 26.88, -82.10],
+    ["Pine Island Sound", 26.62, -82.15],
+    ["Burnt Store", 26.76, -82.06],
+    ["the harbor", 26.93, -82.045]
+  ];
+  function toPx(lat, lon) {
+    const x = lon * Math.PI / 180 * REARTH;
+    const y = Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360)) * REARTH;
+    return [Math.round((x - RMINX) / (RMAXX - RMINX) * RW),
+            Math.round((RMAXY - y) / (RMAXY - RMINY) * RH)];
+  }
+  const PXPTS = POINTS.map(p => { const xy = toPx(p[1], p[2]); return [p[0], xy[0], xy[1]]; });
+  function sev(r, g, b, a) {
+    if (a < 128) return 0;                                  // no echo
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), dm = mx - mn;
+    const v = mx / 255, s = mx ? dm / mx : 0;
+    if (s < 0.15 && v > 0.85) return 2;                     // near-white: extreme/hail
+    let h = 0;
+    if (dm) { if (mx === r) h = ((g - b) / dm) % 6; else if (mx === g) h = (b - r) / dm + 2; else h = (r - g) / dm + 4; h *= 60; if (h < 0) h += 360; }
+    if ((h < 20 || h >= 300) && s > 0.5) return 2;          // red / magenta: storm core (~50+ dBZ)
+    if (h >= 20 && h < 70) return 1;                        // yellow / orange: heavy showers (~38-50 dBZ)
+    return 0;                                               // green / blue: light rain, ignore
+  }
+  async function sampleRadar() {
+    return await new Promise(res => {
+      const img = new Image(); img.crossOrigin = "anonymous";
+      img.onload = () => {
+        try {
+          const cv = document.createElement("canvas"); cv.width = RW; cv.height = RH;
+          const ctx = cv.getContext("2d"); ctx.drawImage(img, 0, 0);
+          let best = 0, where = "";
+          for (const pt of PXPTS) {
+            const px = pt[1], py = pt[2];
+            if (px < 2 || px >= RW - 2 || py < 2 || py >= RH - 2) continue;
+            const d = ctx.getImageData(px - 2, py - 2, 5, 5).data;   // 5x5 neighborhood
+            let ps = 0;
+            for (let i = 0; i < d.length; i += 4) { const t = sev(d[i], d[i+1], d[i+2], d[i+3]); if (t > ps) ps = t; }
+            if (ps > best) { best = ps; where = pt[0]; }
+          }
+          res({ sev: best, where: where });
+        } catch (e) { res({ sev: -1, where: "" }); }         // -1: unavailable, do not override
+      };
+      img.onerror = () => res({ sev: -1, where: "" });
+      img.src = RBASE + "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&FORMAT=image/png" +
+        "&TRANSPARENT=true&SRS=EPSG:3857&WIDTH=" + RW + "&HEIGHT=" + RH +
+        "&BBOX=" + RMINX + "," + RMINY + "," + RMAXX + "," + RMAXY +
+        "&LAYERS=nexrad-n0q&_=" + Math.floor(Date.now() / 300000);
+      setTimeout(() => res({ sev: -1, where: "" }), 12000);
+    });
+  }
+
   async function refreshObs() {
     const [w, a, t, m] = await Promise.all([
       ...["wind", "air_temperature", "water_temperature"].map(
@@ -329,42 +398,60 @@
     }
     const cond = m && m.properties && m.properties.textDescription || "";
     if (cond) bits.push(cond);
-    if (!bits.length) return;
-    strip.querySelector(".now-val").textContent = bits.join(" \u00B7 ");
-    if (ts && station) {
-      const [hh24, mm] = ts.split(" ")[1].split(":").map(Number);
-      const hh = hh24 % 12 || 12, ap = hh24 >= 12 ? "PM" : "AM";
-      strip.querySelector(".now-src").textContent =
-        station + " station" + (cond ? " & Punta Gorda airport" : "") +
-        " (nearest live obs), " + hh + ":" + String(mm).padStart(2, "0") + " " + ap;
-    }
-    // Live override: current storms/rain or strong gusts post a caution ribbon
-    // above the baked forecast banner, which was issued hours earlier.
-    const banner = document.querySelector(".banner");
-    if (banner) {
-      let msg = "";
-      if (/thunder|\bstorm|squall|\brain|shower/i.test(cond))
-        msg = cond + " over the harbor right now. The window below was issued earlier today.";
-      else if (gust >= 22)
-        msg = "Wind gusting " + gust + " kt right now, stronger than the forecast. Check before running the pass.";
-      let rib = document.getElementById("liveAlert");
-      if (msg) {
-        if (!rib) {
-          rib = document.createElement("div");
-          rib.id = "liveAlert";
-          rib.className = "advisory livealert";
-          banner.parentNode.insertBefore(rib, banner);
-        }
-        rib.textContent = "\u26A0 Live: " + msg;
-        banner.classList.add("superseded");
-      } else if (rib) {
-        rib.remove();
-        banner.classList.remove("superseded");
+    if (strip && bits.length) {
+      strip.querySelector(".now-val").textContent = bits.join(" \u00B7 ");
+      if (ts && station) {
+        const [hh24, mm] = ts.split(" ")[1].split(":").map(Number);
+        const hh = hh24 % 12 || 12, ap = hh24 >= 12 ? "PM" : "AM";
+        strip.querySelector(".now-src").textContent =
+          station + " station" + (cond ? " & Punta Gorda airport" : "") +
+          " (nearest live obs), " + hh + ":" + String(mm).padStart(2, "0") + " " + ap;
       }
     }
+    return { cond: cond, gust: gust };
   }
+
+  // One ribbon, fed by both signals. Radar over the water wins; the airport
+  // METAR and live gusts are the fallback. The ribbon dims the baked banner,
+  // which was issued hours earlier.
+  function renderAlert(radar, cond, gust) {
+    if (!banner) return;
+    let msg = "", cls = "";
+    if (radar && radar.sev === 2) {
+      msg = "Storm core over " + radar.where + " on radar right now. The window below was issued earlier today.";
+      cls = "lv-hi";
+    } else if (radar && radar.sev === 1) {
+      msg = "Heavy showers over " + radar.where + " on radar right now.";
+      cls = "lv-mid";
+    } else if (/thunder|\bstorm|squall|\brain|shower/i.test(cond)) {
+      msg = cond + " at Punta Gorda right now. The window below was issued earlier today.";
+      cls = "lv-hi";
+    } else if (gust >= 22) {
+      msg = "Wind gusting " + gust + " kt right now, stronger than the forecast. Check before running the pass.";
+      cls = "lv-mid";
+    }
+    let rib = document.getElementById("liveAlert");
+    if (msg) {
+      if (!rib) {
+        rib = document.createElement("div");
+        rib.id = "liveAlert";
+        banner.parentNode.insertBefore(rib, banner);
+      }
+      rib.className = "livealert " + cls;
+      rib.textContent = "\u26A0 Live: " + msg;
+      banner.classList.add("superseded");
+    } else if (rib) {
+      rib.remove();
+      banner.classList.remove("superseded");
+    }
+  }
+
   async function refresh() {
-    if (strip) { try { await refreshObs(); } catch (e) {} }
+    let obs = { cond: "", gust: 0 };
+    try { if (strip) obs = await refreshObs(); } catch (e) {}
+    let radar = { sev: -1, where: "" };
+    try { radar = await sampleRadar(); } catch (e) {}
+    renderAlert(radar, obs.cond, obs.gust);
   }
   refresh();
   setInterval(refresh, 300000);
