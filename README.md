@@ -29,12 +29,19 @@ live work in the browser on load and every five minutes:
 
 - Refreshes the "Right now" observations (CO-OPS wind and water, KPGD sky).
 - Animates the harbor-cropped NEXRAD loop.
+- Posts official NWS active alerts for the marine zones (GMZ836 harbor,
+  GMZ856 Gulf) from `api.weather.gov/alerts/active`. Special Marine Warnings
+  and Severe Thunderstorm warnings render red, Small Craft Advisories amber,
+  at the top of the page. This is the authoritative feed for warnings issued
+  between the 4x/day forecast builds; when it loads it supersedes the baked
+  CWF advisory headline.
 - Samples NEXRAD reflectivity at several harbor points (Boca Grande Pass,
   Charlotte Harbor, Pine Island Sound, Burnt Store) off the same IEM frames,
   classifies each by the n0q color ramp, and posts a live storm ribbon over
   the banner when a cell is on the water. This catches convection sitting on
-  the harbor that the inland KPGD observation alone would miss. Canvas
-  readback works because IEM serves CORS headers.
+  the harbor that the inland KPGD observation alone would miss, and acts as an
+  early backstop before an official warning is issued (it steps aside when one
+  is). Canvas readback works because IEM serves CORS headers.
 
 ## Source of truth
 
