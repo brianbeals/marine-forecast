@@ -35,7 +35,8 @@ names the cleanest window, all from the raw gridpoint (gusts + rain). A live
 A Tides & Best Fishing section carries a per-day tide curve (cosine-interpolated
 between the highs and lows so it takes the real tide shape) with the best-bite
 windows shaded and dawn/dusk marked, next to the Port Boca Grande hi/lo times
-and a tide-plus-light bite rating.
+and a tide-plus-light bite rating. Today's curve carries the same live "now"
+line as the wind chart.
 
 ### Live in the browser (on load, every 5 min)
 
