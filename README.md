@@ -32,6 +32,11 @@ peak, shades each hour green / yellow / red for go / marginal / don't-go, and
 names the cleanest window, all from the raw gridpoint (gusts + rain). A live
 "now" line tracks the current hour across it.
 
+A Tides & Best Fishing section carries a per-day tide curve (cosine-interpolated
+between the highs and lows so it takes the real tide shape) with the best-bite
+windows shaded and dawn/dusk marked, next to the Port Boca Grande hi/lo times
+and a tide-plus-light bite rating.
+
 ### Live in the browser (on load, every 5 min)
 
 - Right-now observations (CO-OPS wind and water, KPGD sky, plus feels-like and
