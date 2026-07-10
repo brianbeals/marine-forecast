@@ -45,6 +45,7 @@
   .nwsalert{padding:12px 15px;border-radius:8px;margin:0 0 8px;line-height:1.4;
     border:1px solid;border-left-width:5px}
   .nwsalert .ev{display:block;font-size:.95rem;font-weight:700;letter-spacing:.3px}
+  .nwsalert a.ev{color:inherit;text-decoration:underline;text-underline-offset:2px}
   .nwsalert .hl{display:block;font-size:.83rem;font-weight:500;margin-top:3px}
   .nwsalert.nws-warn{background:#FDEDEC;border-color:#E6B0AA;border-left-color:var(--risk);color:#922B21}
   .nwsalert.nws-adv{background:#FEF9E7;border-color:#F7DC6F;border-left-color:var(--caution);color:#7D6608}
@@ -226,8 +227,13 @@
   <div class="banner">
     <b>Friday, July 10, 2026.</b> Marginal boating day. Winds 5–10 kt, light chop on the bay. Numerous storms likely, mostly afternoon and evening, with gusty downpours that can spike local seas and gusts fast. Rain around 64%. Run the pass and any Gulf legs early.
   </div>
+<<<<<<< HEAD
   <div class="trop t0"><a href="https://www.nhc.noaa.gov/gtwo.php?basin=atlc&amp;fdays=7" target="_blank" rel="noopener">Tropics</a> quiet. No Atlantic development expected in the next 7 days. NHC outlook, 800 AM EDT Fri Jul 10 2026.</div>
   <div class="redtide rt0"><b><a href="https://gis.myfwc.com/redtidecurrentstatus/" target="_blank" rel="noopener">Red tide:</a></b> none detected. FWC shows background levels at all 13 sample sites near Charlotte Harbor and Pine Island Sound (through Jul  8 2026).</div>
+=======
+  <div class="trop t0"><b><a href="https://www.nhc.noaa.gov/gtwo.php?basin=atlc&amp;fdays=7" target="_blank" rel="noopener">Tropics</a></b> quiet. No Atlantic development expected in the next 7 days. NHC outlook, 200 PM EDT Mon Jul 6 2026.</div>
+  <div class="redtide rt0"><b><a href="https://gis.myfwc.com/redtidecurrentstatus/" target="_blank" rel="noopener">Red tide:</a></b> none detected. FWC shows background levels at all 15 sample sites near Charlotte Harbor and Pine Island Sound (through Jun 30 2026).</div>
+>>>>>>> 1c2c30b (Radar ribbon: gate n0q on MRMS a2m surface precip; link NWS marine warnings to the zone page; bold Tropics label)
 
   <div class="today">
     <h2>Today &middot; Friday</h2>
@@ -419,16 +425,17 @@
         try {
           const cv = document.createElement("canvas"); cv.width = RW; cv.height = RH;
           const ctx = cv.getContext("2d"); ctx.drawImage(img, 0, 0);
-          let best = 0, where = "";
+          let best = 0, where = "", per = {};
           for (const pt of PXPTS) {
             const px = pt[1], py = pt[2];
             if (px < 2 || px >= RW - 2 || py < 2 || py >= RH - 2) continue;
             const d = ctx.getImageData(px - 2, py - 2, 5, 5).data;   // 5x5 neighborhood
             let ps = 0;
             for (let i = 0; i < d.length; i += 4) { const t = sev(d[i], d[i+1], d[i+2], d[i+3]); if (t > ps) ps = t; }
+            per[pt[0]] = ps;
             if (ps > best) { best = ps; where = pt[0]; }
           }
-          res({ sev: best, where: where });
+          res({ sev: best, where: where, per: per });
         } catch (e) { res({ sev: -1, where: "" }); }         // -1: unavailable, do not override
       };
       img.onerror = () => res({ sev: -1, where: "" });
@@ -438,6 +445,97 @@
         "&LAYERS=nexrad-n0q&_=" + Math.floor(Date.now() / 300000);
       setTimeout(() => res({ sev: -1, where: "" }), 12000);
     });
+  }
+
+  // --- MRMS surface-precip gate (a2m). The nearest WSR-88D (KTBW, Ruskin) is
+  // ~70 nm off, so its 0.5 deg beam sits ~7,000-9,000 ft over the harbor. At
+  // that height n0q base reflectivity flags virga and clear-air returns that
+  // never reach the water, which is why the ribbon fired on dry days. MRMS 2-min
+  // accumulation is a QC'd SURFACE product: a colored pixel means rain is
+  // actually reaching the ground. Same IEM host as n0q, so the crossOrigin
+  // canvas readback needs no new CORS. n0q stays the visual and the intensity
+  // source; a2m is only the on/off gate. Verified 2026-07-10 against a live
+  // frame: 7000x3500 EPSG:4326 CONUS at 0.01 deg, OPAQUE PNG;
+  // black(0,0,0)=dry, grey(144,144,144)=no coverage, any chroma=precip.
+  const A2M_LONW = -130, A2M_LATN = 55, A2M_LONSPAN = 70, A2M_LATSPAN = 35;
+  function a2mUrl(d) {
+    const p = n => String(n).padStart(2, "0");
+    const Y = d.getUTCFullYear(), M = p(d.getUTCMonth() + 1), D = p(d.getUTCDate());
+    const h = p(d.getUTCHours()), m = p(d.getUTCMinutes());
+    return "https://mesonet.agron.iastate.edu/archive/data/" + Y + "/" + M + "/" + D +
+      "/GIS/mrms/a2m_" + Y + M + D + h + m + ".png";
+  }
+  function a2mStamp(now) {                             // newest even UTC minute, minus a 4-min latency lag
+    const d = new Date(now.getTime() - 4 * 60000);
+    d.setUTCSeconds(0, 0);
+    if (d.getUTCMinutes() % 2 !== 0) d.setUTCMinutes(d.getUTCMinutes() - 1);
+    return d;
+  }
+  function a2mClass(r, g, b, a) {
+    if (a < 128) return 0;                            // (frame is opaque; guard anyway): no-data
+    if (r === 144 && g === 144 && b === 144) return 0; // grey: outside radar coverage -> no-data
+    if (r < 16 && g < 16 && b < 16) return 1;          // black: 0 accumulation -> dry
+    return 2;                                          // chroma: precip at the surface
+  }
+  async function sampleA2m() {
+    const load = u => new Promise(res => {
+      const img = new Image(); img.crossOrigin = "anonymous";
+      img.onload = () => res(img); img.onerror = () => res(null); img.src = u;
+    });
+    let d = a2mStamp(new Date()), img = null;
+    for (let i = 0; i <= 10; i++) {                    // probe back up to 20 min for the newest posted frame
+      img = await load(a2mUrl(d)); if (img) break;
+      d = new Date(d.getTime() - 120000);
+    }
+    if (!img) return null;                             // no frame: caller falls back to n0q alone
+    const w = img.naturalWidth, h = img.naturalHeight;
+    const pxLon = A2M_LONSPAN / w, pxLat = A2M_LATSPAN / h;  // derive from actual dims (resample-proof)
+    const cols = POINTS.map(p => Math.floor((p[2] - A2M_LONW) / pxLon));
+    const rows = POINTS.map(p => Math.floor((A2M_LATN - p[1]) / pxLat));
+    const R = 2;                                       // 5x5 neighborhood per point (an a2m pixel is ~1.1 km)
+    const x0 = Math.max(0, Math.min.apply(null, cols) - R);
+    const y0 = Math.max(0, Math.min.apply(null, rows) - R);
+    const x1 = Math.min(w, Math.max.apply(null, cols) + R + 1);
+    const y1 = Math.min(h, Math.max.apply(null, rows) + R + 1);
+    const cw = x1 - x0, ch = y1 - y0;
+    if (cw <= 0 || ch <= 0) return null;
+    // Blit ONLY the harbor window. The full 7000x3500 frame is ~98 MB of
+    // ImageData, too heavy for a phone; this crop is a few hundred pixels.
+    const cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;
+    const ctx = cv.getContext("2d"); ctx.drawImage(img, x0, y0, cw, ch, 0, 0, cw, ch);
+    const buf = ctx.getImageData(0, 0, cw, ch).data;
+    const status = {};
+    for (let k = 0; k < POINTS.length; k++) {
+      const cc = cols[k] - x0, rr = rows[k] - y0;
+      let precip = false, anyData = false;
+      for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) {
+        const xx = cc + dx, yy = rr + dy;
+        if (xx < 0 || yy < 0 || xx >= cw || yy >= ch) continue;
+        const o = (yy * cw + xx) * 4;
+        const t = a2mClass(buf[o], buf[o + 1], buf[o + 2], buf[o + 3]);
+        if (t >= 1) anyData = true;
+        if (t === 2) precip = true;
+      }
+      status[POINTS[k][0]] = precip ? "PRECIP" : (anyData ? "DRY" : "NO_DATA");
+    }
+    return status;                                     // name -> PRECIP | DRY | NO_DATA
+  }
+
+  // Gate n0q intensity with the a2m ground truth. Keep an n0q hit only where
+  // a2m confirms precip at the surface; drop it where a2m says dry (virga /
+  // clear-air); hold n0q where a2m has no coverage (never assert "clear" from a
+  // gap). n0q still decides HOW bad (sev 1 vs 2) and names the spot.
+  function gateRadar(n0q, a2m) {
+    if (!n0q || n0q.sev < 0) return n0q;               // n0q unavailable: nothing to gate
+    if (!a2m || !n0q.per) return n0q;                  // a2m unavailable: fall back to n0q alone
+    let best = 0, where = "";
+    for (const pt of POINTS) {
+      const name = pt[0], s = n0q.per[name] || 0;
+      if (s <= 0) continue;
+      if (a2m[name] === "DRY") continue;               // echo aloft only: suppress
+      if (s > best) { best = s; where = name; }        // PRECIP or NO_DATA: trust n0q
+    }
+    return { sev: best, where: where };
   }
 
   // --- Official NWS active alerts for the marine zones (harbor + Gulf run).
@@ -458,6 +556,7 @@
     if (!box) { box = document.createElement("div"); box.id = "nwsAlerts"; const h = document.querySelector("header"); if (h) h.insertAdjacentElement("afterend", box); }
     if (!feats.length) { box.innerHTML = ""; return { ok: true, hasStormWarning: false }; }
     feats.sort((a, b) => (SEVRANK[b.properties.severity] || 0) - (SEVRANK[a.properties.severity] || 0));
+    const OURZ = ["GMZ836", "GMZ856"];                       // the harbor + Gulf-run zones this page tracks
     const seen = new Set(); let html = "", storm = false;
     for (const f of feats) {
       const p = f.properties, ev = p.event || "Alert";
@@ -466,7 +565,16 @@
       if (warn) storm = true;
       const cls = warn ? "nws-warn" : "nws-adv";
       const hl = esc(p.headline || "");
-      html += '<div class="nwsalert ' + cls + '"><span class="ev">\u26A0 ' + esc(ev) + '</span>' +
+      // Link the event name to the affected marine-zone page, which always shows
+      // the warning currently in effect. (A per-alert URL would 404 once the
+      // short-lived SMW expires; the zone page stays valid.) Pick the alert's
+      // own zone that this page tracks so the linked page really shows it.
+      const ugc = (p.geocode && p.geocode.UGC) || [];
+      let zid = "GMZ836";
+      for (const z of ugc) { if (OURZ.indexOf(z) >= 0) { zid = z; break; } }
+      const zurl = "https://forecast.weather.gov/MapClick.php?zoneid=" + zid;
+      html += '<div class="nwsalert ' + cls + '">' +
+              '<a class="ev" href="' + zurl + '" target="_blank" rel="noopener">\u26A0 ' + esc(ev) + ' \u2192</a>' +
               (hl ? '<span class="hl">' + hl + '</span>' : '') + '</div>';
     }
     box.innerHTML = html;
@@ -564,6 +672,9 @@
     try { nws = await renderNwsAlerts(); } catch (e) {}
     let radar = { sev: -1, where: "" };
     try { radar = await sampleRadar(); } catch (e) {}
+    let a2m = null;
+    try { a2m = await sampleA2m(); } catch (e) {}   // MRMS surface-precip gate
+    radar = gateRadar(radar, a2m);                  // suppress virga / clear-air false fires
     renderAlert(radar, obs.cond, obs.gust, nws.hasStormWarning);
   }
   refresh();
