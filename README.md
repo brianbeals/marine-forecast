@@ -44,16 +44,24 @@ line as the wind chart.
   visibility when they cross a threshold worth showing).
 - Official NWS active alerts for the marine zones (GMZ836 harbor, GMZ856 Gulf)
   from `api.weather.gov/alerts/active`. Special Marine and Severe Thunderstorm
-  warnings render red, Small Craft Advisories amber, at the top. Authoritative
-  for warnings issued between builds; supersedes the baked CWF headline.
+  warnings render red, Small Craft Advisories amber, at the top. Each alert links
+  to the affected marine-zone forecast page, which keeps showing the warning text
+  after the short-lived alert itself expires. Authoritative for warnings issued
+  between builds; supersedes the baked CWF headline.
 - The harbor-cropped NEXRAD loop over an Esri basemap (World Street by day, Dark
   Gray by night) with the coastline and labels layered above the radar so
   geography survives a cell.
 - NEXRAD reflectivity sampled at several harbor points (Boca Grande Pass,
   Charlotte Harbor, Pine Island Sound, Burnt Store), classified by the n0q color
-  ramp; posts a live storm ribbon when a cell is on the water, an early backstop
-  before an official warning (steps aside when one is up). Canvas readback works
-  because IEM serves CORS headers.
+  ramp, then gated against MRMS 2-minute surface accumulation (`mrms_a2m`) at the
+  same points: the ribbon fires only where rain is actually reaching the ground.
+  KTBW sits ~70 nm off, so its 0.5° beam is thousands of feet over the harbor and
+  raw reflectivity flags virga and clear-air returns that never wet the water; the
+  surface-precip gate drops those false fires while n0q still sets the intensity
+  wording. A no-coverage a2m pixel holds the n0q read rather than falsely clearing
+  it. Posts a live storm ribbon as an early backstop before an official warning
+  (steps aside when one is up). MRMS is served from the same IEM host as the radar
+  loop, so canvas readback needs no extra CORS.
 
 ## Deploy
 
