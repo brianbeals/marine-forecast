@@ -65,26 +65,17 @@ line as the wind chart.
 
 ## Deploy
 
-GitHub Actions (`.github/workflows/publish.yml`) polls every 10 minutes through
-the hour after each expected NWS issuance (about 3:15 and 9:15, AM and PM
-Eastern), rebuilds when the issuance is new, commits `index.html`, and deploys
-to Pages through the Actions pipeline (`upload-pages-artifact` + `deploy-pages`).
-A workflow-level concurrency group serializes runs so deploys never collide.
-Pages source is set to "GitHub Actions."
+The forecast is rendered by a build pipeline that fetches the sources above,
+builds `index.html`, and pushes the finished page into this repo. This repo
+publishes it with GitHub Pages (deploy from `main` / root) on the custom domain
+weather.brianbeals.com. The build runs on a schedule that polls each NWS
+issuance window (about 3:15 and 9:15, AM and PM Eastern) and publishes only when
+the issuance is new. DST is handled automatically (`zoneinfo`,
+America/New_York).
 
-## Source of truth
+## What's here
 
-This repo is canonical. The `scripts/` here are what runs. The project began
-as the Cowork `marine-forecast` skill in `brianbeals/claude-skills`, but has
-since migrated to git; that skill copy is legacy and is no longer synced from.
-Edit the scripts here.
-
-## Local run
-
-```bash
-python3 build.py   # writes fetched/ + index.html
-open index.html
-```
-
-DST is handled automatically (`zoneinfo`, America/New_York). Stdlib only, no
-requirements file.
+This repo holds the published site: the rendered `index.html`, the custom-domain
+`CNAME`, and the page assets. The build code that fetches the data and renders
+the page lives in a separate private repository, so the pipeline itself isn't
+part of this repo.
