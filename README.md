@@ -6,8 +6,8 @@ Boca Grande Pass).
 
 ## How it works
 
-`build.py` fetches the NOAA/NWS/FWC sources below and renders a single static
-`index.html`:
+A build pipeline fetches the NOAA/NWS/FWC sources below and renders a single
+static `index.html`:
 
 | Source | What | Required |
 |---|---|---|
