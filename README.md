@@ -16,14 +16,27 @@ static `index.html`:
 | api.weather.gov gridpoints TBW/91,55 forecast | Air temps, sky, rain % per period | No |
 | api.weather.gov gridpoints TBW/91,55 (raw) | Hourly wind, gust, rain % for the timeline | No |
 | api.weather.gov gridpoints TBW/77,42 (raw) | Modeled nearshore Gulf wave height + period | No |
-| NHC Atlantic Tropical Weather Outlook | Tropics line | No |
+| NHC Atlantic Tropical Weather Outlook (MIATWOAT) | Tropics line, formation odds | No |
+| NHC CurrentStorms.json | Live cyclone positions. Filtered to the Atlantic basin | No |
 | FWC HAB current status (ArcGIS feature layer) | Red tide sample status near the harbor | No |
 | CO-OPS latest obs, Fort Myers 8725520 | Live wind + water temp | No |
 
 The page leads with a condition-based verdict line (chop, storm risk, and rain
 scored into a plain go / caution / marginal call), then situational lines: the
 NHC tropics outlook and a five-step red-tide stoplight (green none to red high,
-linked to the FWC map). The Today hero shows wind, water state and storm risk as
+linked to the FWC map).
+
+The tropics line is its own stoplight: green when no Atlantic development is
+expected and nothing is active, amber when formation areas are noted or a storm
+is active but distant, red when a system is within 500 nm or already in the Gulf.
+Named storms with no position data stay red, since guessing low on a hurricane is
+the wrong way to be wrong.
+
+Only the Atlantic basin counts. `CurrentStorms.json` carries every NHC basin, so
+an East Pacific hurricane off Baja arrives in the same feed as an Atlantic one.
+Storms are filtered by the basin in their NHC id (`al`, `ep`, `cp`) before any
+distance is measured, which keeps a Pacific system from being named on the page
+or from holding the stoplight off green while the Atlantic is quiet. The Today hero shows wind, water state and storm risk as
 color pills, rain, air, tides and best bite, plus the CWF Gulf seas and a modeled
 nearshore wave reading (current + today's peak) for the pass run.
 
