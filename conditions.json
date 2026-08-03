@@ -1,11 +1,11 @@
 {
-  "issued": "340 AM EDT Mon Aug 3 2026",
-  "generated_utc": "2026-08-03T10:52:27Z",
+  "issued": "951 AM EDT Mon Aug 3 2026",
+  "generated_utc": "2026-08-03T15:57:43Z",
   "zone": "GMZ836",
   "verdict": "caution",
   "summary": "Boatable, but keep an eye on the sky. Winds 5\u201310 kt, light chop on the bay. Isolated storms possible, mostly afternoon.",
   "wind": {
-    "dir": "S",
+    "dir": "SW",
     "speed": "5\u201310 kt"
   },
   "water": "Light chop",
