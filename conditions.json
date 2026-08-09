@@ -1,11 +1,11 @@
 {
-  "issued": "311 AM EDT Sun Aug 9 2026",
-  "generated_utc": "2026-08-09T08:04:41Z",
+  "issued": "951 AM EDT Sun Aug 9 2026",
+  "generated_utc": "2026-08-09T14:02:38Z",
   "zone": "GMZ836",
   "verdict": "caution",
   "summary": "Boatable, but keep an eye on the sky. Winds 5\u201310 kt, light chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 50%. Run the pass and any Gulf legs before early afternoon.",
   "wind": {
-    "dir": "E",
+    "dir": "SE",
     "speed": "5\u201310 kt"
   },
   "water": "Light chop",
