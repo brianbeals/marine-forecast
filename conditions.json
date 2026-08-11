@@ -1,17 +1,17 @@
 {
-  "issued": "1028 AM EDT Mon Aug 10 2026",
-  "generated_utc": "2026-08-10T14:33:03Z",
+  "issued": "727 PM EDT Mon Aug 10 2026",
+  "generated_utc": "2026-08-11T03:12:32Z",
   "zone": "GMZ836",
   "verdict": "caution",
-  "summary": "Boatable, but keep an eye on the sky. Winds 5\u201310 kt, light chop on the bay. Isolated storms possible, mostly afternoon.",
+  "summary": "Boatable, but keep an eye on the sky. Winds 5 kt, light chop on the bay. Isolated storms possible, mostly afternoon.",
   "wind": {
-    "dir": "SE",
-    "speed": "5\u201310 kt"
+    "dir": "NW",
+    "speed": "5 kt"
   },
   "water": "Light chop",
   "storms": "Isolated storms",
-  "rain_pct": 22,
-  "gulf_seas": "Around 2 feet early, then 1 foot or less",
+  "rain_pct": 10,
+  "gulf_seas": "1 foot or less",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
 }
