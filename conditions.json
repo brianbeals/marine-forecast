@@ -1,16 +1,16 @@
 {
-  "issued": "431 PM EDT Fri Aug 14 2026",
-  "generated_utc": "2026-08-14T20:49:27Z",
+  "issued": "810 PM EDT Fri Aug 14 2026",
+  "generated_utc": "2026-08-15T02:27:32Z",
   "zone": "GMZ836",
-  "verdict": "marginal",
-  "summary": "Marginal boating day. Winds 5\u201310 kt, light chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 68%. Run the pass and any Gulf legs before early afternoon.",
+  "verdict": "caution",
+  "summary": "Boatable, but keep an eye on the sky. Winds 5\u201310 kt, light chop on the bay. Isolated storms possible, mostly afternoon. Rain around 33%.",
   "wind": {
-    "dir": "N",
+    "dir": "SE",
     "speed": "5\u201310 kt"
   },
   "water": "Light chop",
-  "storms": "Scattered storms",
-  "rain_pct": 68,
+  "storms": "Isolated storms",
+  "rain_pct": 33,
   "gulf_seas": "1 foot or less",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
