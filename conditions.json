@@ -1,14 +1,14 @@
 {
-  "issued": "340 PM EDT Sun Aug 16 2026",
-  "generated_utc": "2026-08-16T19:52:01Z",
+  "issued": "850 PM EDT Sun Aug 16 2026",
+  "generated_utc": "2026-08-17T02:35:01Z",
   "zone": "GMZ836",
-  "verdict": "good",
-  "summary": "Good boating window. Winds 5\u201310 kt, light chop on the bay. No organized storms in the outlook.",
+  "verdict": "caution",
+  "summary": "Boatable, but keep an eye on the sky. Winds 10\u201315 kt, moderate chop on the bay. No organized storms in the outlook.",
   "wind": {
-    "dir": "NW",
-    "speed": "5\u201310 kt"
+    "dir": "N",
+    "speed": "10\u201315 kt"
   },
-  "water": "Light chop",
+  "water": "Moderate chop",
   "storms": null,
   "rain_pct": 3,
   "gulf_seas": "1 foot or less",
