@@ -1,6 +1,6 @@
 {
-  "issued": "855 PM EDT Mon Aug 17 2026",
-  "generated_utc": "2026-08-18T02:30:20Z",
+  "issued": "418 AM EDT Tue Aug 18 2026",
+  "generated_utc": "2026-08-18T08:57:00Z",
   "zone": "GMZ836",
   "verdict": "caution",
   "summary": "Boatable, but keep an eye on the sky. Winds 5\u201310 kt, moderate chop on the bay. No organized storms in the outlook.",
@@ -10,8 +10,8 @@
   },
   "water": "Moderate chop",
   "storms": null,
-  "rain_pct": 5,
-  "gulf_seas": "1 foot or less, then around 2 feet in the afternoon",
+  "rain_pct": 4,
+  "gulf_seas": "1 foot or less, then around 2 feet this afternoon",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
 }
