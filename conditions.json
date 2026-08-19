@@ -1,15 +1,15 @@
 {
-  "issued": "405 AM EDT Wed Aug 19 2026",
-  "generated_utc": "2026-08-19T08:58:05Z",
+  "issued": "826 AM EDT Wed Aug 19 2026",
+  "generated_utc": "2026-08-19T14:00:34Z",
   "zone": "GMZ836",
   "verdict": "caution",
-  "summary": "Boatable, but keep an eye on the sky. Winds 5\u201310 kt, moderate chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 47%. Run the pass and any Gulf legs before early afternoon.",
+  "summary": "Boatable, but keep an eye on the sky. Winds 10\u201315 kt, moderate chop on the bay. Isolated storms possible, mostly afternoon. Rain around 47%.",
   "wind": {
     "dir": "NW",
-    "speed": "5\u201310 kt"
+    "speed": "10\u201315 kt"
   },
   "water": "Moderate chop",
-  "storms": "Scattered storms",
+  "storms": "Isolated storms",
   "rain_pct": 47,
   "gulf_seas": "Around 2 feet",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
