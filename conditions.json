@@ -1,12 +1,12 @@
 {
-  "issued": "323 AM EDT Mon Aug 24 2026",
-  "generated_utc": "2026-08-24T08:06:50Z",
+  "issued": "959 AM EDT Mon Aug 24 2026",
+  "generated_utc": "2026-08-24T14:05:54Z",
   "zone": "GMZ836",
   "verdict": "good",
-  "summary": "Good boating window. Winds 5 kt, light chop on the bay. No organized storms in the outlook.",
+  "summary": "Good boating window. Winds 5\u201310 kt, light chop on the bay. No organized storms in the outlook.",
   "wind": {
-    "dir": "SE",
-    "speed": "5 kt"
+    "dir": "S",
+    "speed": "5\u201310 kt"
   },
   "water": "Light chop",
   "storms": null,
