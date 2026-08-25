@@ -1,16 +1,16 @@
 {
-  "issued": "321 PM EDT Mon Aug 24 2026",
-  "generated_utc": "2026-08-24T19:48:05Z",
+  "issued": "851 PM EDT Mon Aug 24 2026",
+  "generated_utc": "2026-08-25T02:32:40Z",
   "zone": "GMZ836",
   "verdict": "good",
-  "summary": "Good boating window. Winds 5\u201310 kt, light chop on the bay. No organized storms in the outlook.",
+  "summary": "Good boating window. Winds 5 kt, bay smooth. No organized storms in the outlook.",
   "wind": {
-    "dir": "W",
-    "speed": "5\u201310 kt"
+    "dir": "SW",
+    "speed": "5 kt"
   },
-  "water": "Light chop",
+  "water": "Smooth",
   "storms": null,
-  "rain_pct": 12,
+  "rain_pct": 20,
   "gulf_seas": "1 foot or less",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
