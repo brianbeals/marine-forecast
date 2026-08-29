@@ -1,12 +1,12 @@
 {
-  "issued": "322 AM EDT Sat Aug 29 2026",
-  "generated_utc": "2026-08-29T07:54:24Z",
+  "issued": "1100 AM EDT Sat Aug 29 2026",
+  "generated_utc": "2026-08-29T17:14:48Z",
   "zone": "GMZ836",
   "verdict": "marginal",
-  "summary": "Marginal boating day. Winds 5 kt, bay smooth. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 62%. Run the pass and any Gulf legs before early afternoon.",
+  "summary": "Marginal boating day. Winds 5\u201310 kt, bay smooth. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 62%. Run the pass and any Gulf legs before early afternoon.",
   "wind": {
     "dir": "E",
-    "speed": "5 kt"
+    "speed": "5\u201310 kt"
   },
   "water": "Smooth",
   "storms": "Scattered storms",
