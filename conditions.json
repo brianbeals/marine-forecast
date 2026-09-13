@@ -1,16 +1,16 @@
 {
-  "issued": "900 PM EDT Sat Sep 12 2026",
-  "generated_utc": "2026-09-13T06:17:49Z",
+  "issued": "310 AM EDT Sun Sep 13 2026",
+  "generated_utc": "2026-09-13T08:16:16Z",
   "zone": "GMZ836",
   "verdict": "marginal",
-  "summary": "Marginal boating day. Winds 5\u201310 kt, bay smooth. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 64%. Run the pass and any Gulf legs before early afternoon.",
+  "summary": "Marginal boating day. Winds 5 kt, bay smooth. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 71%. Run the pass and any Gulf legs before early afternoon.",
   "wind": {
     "dir": "E",
-    "speed": "5\u201310 kt"
+    "speed": "5 kt"
   },
   "water": "Smooth",
   "storms": "Scattered storms",
-  "rain_pct": 64,
+  "rain_pct": 71,
   "gulf_seas": "1 foot or less",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
