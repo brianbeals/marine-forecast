@@ -1,17 +1,17 @@
 {
-  "issued": "346 PM EDT Sun Oct 4 2026",
-  "generated_utc": "2026-10-04T22:21:56Z",
+  "issued": "729 PM EDT Sun Oct 4 2026",
+  "generated_utc": "2026-10-04T23:56:44Z",
   "zone": "GMZ836",
-  "verdict": "caution",
-  "summary": "Boatable, but keep an eye on the sky. Winds 5 kt, light chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 36%. Run the pass and any Gulf legs before early afternoon.",
+  "verdict": "good",
+  "summary": "Good boating window. Winds 5\u201310 kt, light chop on the bay. No organized storms in the outlook.",
   "wind": {
-    "dir": "S",
-    "speed": "5 kt"
+    "dir": "SE",
+    "speed": "5\u201310 kt"
   },
   "water": "Light chop",
-  "storms": "Scattered storms",
-  "rain_pct": 36,
-  "gulf_seas": "Around 2 feet",
+  "storms": null,
+  "rain_pct": null,
+  "gulf_seas": "Around 2 feet in the morning, then 1 foot or less",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
 }
