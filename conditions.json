@@ -1,17 +1,17 @@
 {
-  "issued": "331 AM EDT Mon Oct 5 2026",
-  "generated_utc": "2026-10-05T10:22:14Z",
+  "issued": "1004 AM EDT Mon Oct 5 2026",
+  "generated_utc": "2026-10-05T16:09:44Z",
   "zone": "GMZ836",
   "verdict": "good",
   "summary": "Good boating window. Winds 5\u201310 kt, light chop on the bay. No organized storms in the outlook.",
   "wind": {
-    "dir": "SE",
+    "dir": "S",
     "speed": "5\u201310 kt"
   },
   "water": "Light chop",
   "storms": null,
   "rain_pct": 19,
-  "gulf_seas": "Around 2 feet this morning, then 1 foot or less",
+  "gulf_seas": "Around 2 feet late this morning, then 1 foot or less",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
 }
