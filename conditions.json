@@ -1,11 +1,11 @@
 {
-  "issued": "303 AM EDT Thu Oct 8 2026",
-  "generated_utc": "2026-10-08T07:30:11Z",
+  "issued": "917 AM EDT Thu Oct 8 2026",
+  "generated_utc": "2026-10-08T14:47:05Z",
   "zone": "GMZ836",
   "verdict": "marginal",
   "summary": "Marginal boating day. Winds 5\u201310 kt, light chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 80%. Run the pass and any Gulf legs before early afternoon.",
   "wind": {
-    "dir": "SE",
+    "dir": "S",
     "speed": "5\u201310 kt"
   },
   "water": "Light chop",
