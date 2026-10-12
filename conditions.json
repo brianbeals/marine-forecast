@@ -1,14 +1,14 @@
 {
-  "issued": "940 AM EDT Mon Oct 12 2026",
-  "generated_utc": "2026-10-12T16:54:35Z",
+  "issued": "259 PM EDT Mon Oct 12 2026",
+  "generated_utc": "2026-10-12T22:29:19Z",
   "zone": "GMZ836",
-  "verdict": "caution",
-  "summary": "Boatable, but keep an eye on the sky. Winds 10\u201315 kt, moderate chop on the bay. No organized storms in the outlook.",
+  "verdict": "good",
+  "summary": "Good boating window. Winds 5\u201310 kt, light chop on the bay. No organized storms in the outlook.",
   "wind": {
     "dir": "N",
-    "speed": "10\u201315 kt"
+    "speed": "5\u201310 kt"
   },
-  "water": "Moderate chop",
+  "water": "Light chop",
   "storms": null,
   "rain_pct": 0,
   "gulf_seas": "Around 2 feet",
