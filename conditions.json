@@ -1,16 +1,16 @@
 {
-  "issued": "323 AM EDT Sun Oct 18 2026",
-  "generated_utc": "2026-10-18T07:59:19Z",
+  "issued": "456 PM EDT Sun Oct 18 2026",
+  "generated_utc": "2026-10-18T21:34:19Z",
   "zone": "GMZ836",
   "verdict": "marginal",
-  "summary": "Marginal boating day. Winds 15\u201320 kt, choppy on the bay. No organized storms in the outlook.",
+  "summary": "Marginal boating day. Winds 20\u201325 kt, choppy on the bay. No organized storms in the outlook.",
   "wind": {
     "dir": "NE",
-    "speed": "15\u201320 kt"
+    "speed": "20\u201325 kt"
   },
   "water": "Rough",
   "storms": null,
-  "rain_pct": 1,
+  "rain_pct": 0,
   "gulf_seas": "4 to 6 feet, occasionally to 8 feet",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
