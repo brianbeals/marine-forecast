@@ -1,14 +1,14 @@
 {
-  "issued": "319 AM EDT Tue Oct 20 2026",
-  "generated_utc": "2026-10-20T08:28:39Z",
+  "issued": "1018 AM EDT Tue Oct 20 2026",
+  "generated_utc": "2026-10-20T18:01:05Z",
   "zone": "GMZ836",
-  "verdict": "marginal",
-  "summary": "Marginal boating day. Winds 15\u201320 kt, choppy on the bay. No organized storms in the outlook.",
+  "verdict": "caution",
+  "summary": "Boatable, but keep an eye on the sky. Winds 10\u201315 kt, moderate chop on the bay. No organized storms in the outlook.",
   "wind": {
     "dir": "NE",
-    "speed": "15\u201320 kt"
+    "speed": "10\u201315 kt"
   },
-  "water": "Choppy",
+  "water": "Moderate chop",
   "storms": null,
   "rain_pct": 0,
   "gulf_seas": "2 to 4 feet, occasionally to 5 feet",
