@@ -1,11 +1,11 @@
 {
-  "issued": "322 AM EDT Thu Oct 22 2026",
-  "generated_utc": "2026-10-22T08:33:40Z",
+  "issued": "1012 AM EDT Thu Oct 22 2026",
+  "generated_utc": "2026-10-22T14:29:54Z",
   "zone": "GMZ836",
   "verdict": "caution",
   "summary": "Boatable, but keep an eye on the sky. Winds 10\u201315 kt, moderate chop on the bay. No organized storms in the outlook.",
   "wind": {
-    "dir": "NE",
+    "dir": "N",
     "speed": "10\u201315 kt"
   },
   "water": "Moderate chop",
