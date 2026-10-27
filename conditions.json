@@ -1,12 +1,12 @@
 {
-  "issued": "234 AM EDT Tue Oct 27 2026",
-  "generated_utc": "2026-10-27T08:56:05Z",
+  "issued": "933 AM EDT Tue Oct 27 2026",
+  "generated_utc": "2026-10-27T15:19:47Z",
   "zone": "GMZ836",
   "verdict": "marginal",
-  "summary": "Marginal boating day. Winds 20\u201325 kt, choppy on the bay. Isolated storms possible, mostly afternoon.",
+  "summary": "Marginal boating day. Winds 15\u201320 kt, choppy on the bay. Isolated storms possible, mostly afternoon.",
   "wind": {
     "dir": "NE",
-    "speed": "20\u201325 kt"
+    "speed": "15\u201320 kt"
   },
   "water": "Rough",
   "storms": "Isolated storms",
