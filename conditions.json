@@ -1,16 +1,16 @@
 {
-  "issued": "807 PM EDT Tue Oct 27 2026",
-  "generated_utc": "2026-10-28T00:29:59Z",
+  "issued": "249 AM EDT Wed Oct 28 2026",
+  "generated_utc": "2026-10-28T06:54:21Z",
   "zone": "GMZ836",
   "verdict": "marginal",
-  "summary": "Marginal boating day. Winds 20 kt, choppy on the bay. Isolated storms possible, mostly afternoon. Rain around 32%.",
+  "summary": "Marginal boating day. Winds 20 kt, choppy on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 42%. Run the pass and any Gulf legs before early afternoon.",
   "wind": {
     "dir": "NE",
     "speed": "20 kt"
   },
   "water": "Choppy",
-  "storms": "Isolated storms",
-  "rain_pct": 32,
+  "storms": "Scattered storms",
+  "rain_pct": 42,
   "gulf_seas": "3 to 5 feet, occasionally to 6 feet",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
