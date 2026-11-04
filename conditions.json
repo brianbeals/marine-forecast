@@ -1,16 +1,16 @@
 {
-  "issued": "258 PM EST Tue Nov 3 2026",
-  "generated_utc": "2026-11-03T20:57:37Z",
+  "issued": "801 PM EST Tue Nov 3 2026",
+  "generated_utc": "2026-11-04T01:18:46Z",
   "zone": "GMZ836",
   "verdict": "caution",
-  "summary": "Boatable, but keep an eye on the sky. Winds 5\u201310 kt, light chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Rain around 38%. Run the pass and any Gulf legs before early afternoon.",
+  "summary": "Boatable, but keep an eye on the sky. Winds 5\u201310 kt, light chop on the bay. Scattered showers and storms build through the afternoon and evening and can spike local seas and gusts. Run the pass and any Gulf legs before early afternoon.",
   "wind": {
     "dir": "E",
     "speed": "5\u201310 kt"
   },
   "water": "Light chop",
   "storms": "Scattered storms",
-  "rain_pct": 38,
+  "rain_pct": 27,
   "gulf_seas": "Around 2 feet",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
