@@ -1,11 +1,11 @@
 {
-  "issued": "231 AM EST Tue Nov 10 2026",
-  "generated_utc": "2026-11-10T09:59:56Z",
+  "issued": "158 PM EST Tue Nov 10 2026",
+  "generated_utc": "2026-11-10T20:29:30Z",
   "zone": "GMZ836",
   "verdict": "good",
   "summary": "Good boating window. Winds 5 kt, bay smooth. No organized storms in the outlook.",
   "wind": {
-    "dir": "SE",
+    "dir": "SW",
     "speed": "5 kt"
   },
   "water": "Smooth",
