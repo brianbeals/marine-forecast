@@ -1,6 +1,6 @@
 {
-  "issued": "1028 AM EST Thu Nov 12 2026",
-  "generated_utc": "2026-11-12T17:07:29Z",
+  "issued": "225 PM EST Thu Nov 12 2026",
+  "generated_utc": "2026-11-12T21:49:55Z",
   "zone": "GMZ836",
   "verdict": "caution",
   "summary": "Boatable, but keep an eye on the sky. Winds 5\u201310 kt, light chop on the bay. Isolated storms possible, mostly afternoon.",
@@ -10,8 +10,8 @@
   },
   "water": "Light chop",
   "storms": "Isolated storms",
-  "rain_pct": 12,
-  "gulf_seas": "1 foot or less",
+  "rain_pct": 15,
+  "gulf_seas": "1 foot or less, then around 2 feet after midnight",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
 }
