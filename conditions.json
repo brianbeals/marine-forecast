@@ -1,17 +1,17 @@
 {
-  "issued": "1001 AM EST Sat Nov 14 2026",
-  "generated_utc": "2026-11-14T19:23:40Z",
+  "issued": "319 PM EST Sat Nov 14 2026",
+  "generated_utc": "2026-11-14T23:09:22Z",
   "zone": "GMZ836",
   "verdict": "caution",
   "summary": "Boatable, but keep an eye on the sky. Winds 10\u201315 kt, moderate chop on the bay. No organized storms in the outlook.",
   "wind": {
-    "dir": "N",
+    "dir": "NE",
     "speed": "10\u201315 kt"
   },
   "water": "Moderate chop",
   "storms": null,
   "rain_pct": 0,
-  "gulf_seas": "3 to 5 feet, occasionally to 6 feet",
+  "gulf_seas": "2 to 4 feet, occasionally to 5 feet",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
 }
