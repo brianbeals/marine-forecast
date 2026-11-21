@@ -1,12 +1,12 @@
 {
-  "issued": "313 AM EST Sat Nov 21 2026",
-  "generated_utc": "2026-11-21T08:21:09Z",
+  "issued": "922 AM EST Sat Nov 21 2026",
+  "generated_utc": "2026-11-21T16:13:15Z",
   "zone": "GMZ836",
   "verdict": "marginal",
-  "summary": "Marginal boating day. Winds 5\u201310 kt, light chop on the bay. Numerous storms likely, mostly afternoon and evening, with gusty downpours that can spike local seas and gusts fast. Rain around 61%. Run the pass and any Gulf legs early.",
+  "summary": "Marginal boating day. Winds 10 kt, light chop on the bay. Numerous storms likely, mostly afternoon and evening, with gusty downpours that can spike local seas and gusts fast. Rain around 61%. Run the pass and any Gulf legs early.",
   "wind": {
-    "dir": "SW",
-    "speed": "5\u201310 kt"
+    "dir": "S",
+    "speed": "10 kt"
   },
   "water": "Light chop",
   "storms": "Numerous storms",
