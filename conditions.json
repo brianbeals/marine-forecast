@@ -1,17 +1,17 @@
 {
-  "issued": "736 PM EST Mon Nov 23 2026",
-  "generated_utc": "2026-11-24T01:00:38Z",
+  "issued": "329 AM EST Tue Nov 24 2026",
+  "generated_utc": "2026-11-24T11:05:39Z",
   "zone": "GMZ836",
-  "verdict": "marginal",
-  "summary": "Marginal boating day. Winds 5\u201310 kt, light chop on the bay. No organized storms in the outlook.",
+  "verdict": "good",
+  "summary": "Good boating window. Winds 5\u201310 kt, light chop on the bay. No organized storms in the outlook.",
   "wind": {
-    "dir": "N",
+    "dir": "NE",
     "speed": "5\u201310 kt"
   },
   "water": "Light chop",
   "storms": null,
-  "rain_pct": 60,
-  "gulf_seas": "Around 2 feet this evening, then 1 foot or less",
+  "rain_pct": 3,
+  "gulf_seas": "1 foot or less",
   "source": "NWS Tampa Bay, Coastal Waters Forecast (CWFTBW)",
   "url": "https://weather.brianbeals.com/"
 }
